@@ -3,14 +3,43 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Project_Hippocrates_AvaloniaUI.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d"
              x:Class="Project_Hippocrates_AvaloniaUI.Views.MainView"
-             x:DataType="vm:MainViewModel">
+             x:DataType="vm:MainViewModel"
+             >
   
   <Design.DataContext>
     <vm:MainViewModel />
   </Design.DataContext>
 
-  <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+  <Border Padding="10">
+    <!--Main Grid-->
+    <Grid Name="MainGrid">
+
+      <Grid.RowDefinitions>
+        <RowDefinition Height="auto"/>
+        <RowDefinition/>
+      </Grid.RowDefinitions>
+
+      <Border Grid.Row="0" 
+              Padding="10"
+              Background="#C5CAE9">
+        <RelativePanel HorizontalAlignment="Stretch">
+
+          <Button RelativePanel.AlignLeftWithPanel="True"
+                  Height="40"
+                  Width="50"
+                  Background="#FF5722"/>
+
+          <TextBlock RelativePanel.AlignRightWithPanel="True"
+                     RelativePanel.AlignVerticalCenterWithPanel="True"
+                     Text="Jeffry Cone"
+                     Foreground="#3F51B5"/>
+
+        </RelativePanel>
+      </Border>
+
+    </Grid>
+  </Border>
   
 </UserControl>

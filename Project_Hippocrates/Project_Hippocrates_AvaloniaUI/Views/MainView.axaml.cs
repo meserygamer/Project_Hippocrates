@@ -1,4 +1,7 @@
 using Avalonia.Controls;
+using Avalonia.Platform;
+using Avalonia.Threading;
+using System.Threading.Tasks;
 
 namespace Project_Hippocrates_AvaloniaUI.Views
 {
