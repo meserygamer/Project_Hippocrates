@@ -1,15 +1,14 @@
-﻿namespace Project_Hippocrates.Core.Entities
+﻿namespace Project_Hippocrates.Core.Entities;
+    
+public class MedicalDrug
 {
-    public class MedicalDrug
-    {
-        /// <summary>
-        /// Drug Id
-        /// </summary>
-        public Guid Id { get; set; }
+    /// <summary>
+    /// Drug Id
+    /// </summary>
+    public Guid Id { get; set; }
 
-        /// <summary>
-        /// Drug name
-        /// </summary>
-        public string Name { get; set; } = null!;
-    }
+    /// <summary>
+    /// Drug name
+    /// </summary>
+    public string Name { get; set; } = null!;
 }
