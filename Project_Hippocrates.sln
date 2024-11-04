@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project_Hippocrates_Avaloni
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Project_Hippocrates_AvaloniaUI.Desktop", "Project_Hippocrates\Project_Hippocrates_AvaloniaUI.Desktop\Project_Hippocrates_AvaloniaUI.Desktop.csproj", "{644C3CDC-B7C1-4FFA-B405-1AD09D8F26B0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Project_Hippocrates.Core", "Project_Hippocrates.Core\Project_Hippocrates.Core.csproj", "{2ADB67D0-986A-4CB9-835D-9AC785DD74A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{644C3CDC-B7C1-4FFA-B405-1AD09D8F26B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{644C3CDC-B7C1-4FFA-B405-1AD09D8F26B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{644C3CDC-B7C1-4FFA-B405-1AD09D8F26B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2ADB67D0-986A-4CB9-835D-9AC785DD74A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2ADB67D0-986A-4CB9-835D-9AC785DD74A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2ADB67D0-986A-4CB9-835D-9AC785DD74A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2ADB67D0-986A-4CB9-835D-9AC785DD74A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

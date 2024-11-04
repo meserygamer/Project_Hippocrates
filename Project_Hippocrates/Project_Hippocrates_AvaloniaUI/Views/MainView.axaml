@@ -3,10 +3,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Project_Hippocrates_AvaloniaUI.ViewModels"
+             xmlns:gb_ctrl="using:GroupBox.Avalonia.Controls"
+             xmlns:gb_themes="using:GroupBox.Avalonia.Themes"
+             xmlns:sys="using:System"
+             d:DesignWidth="540" d:DesignHeight="1200"
              mc:Ignorable="d"
              x:Class="Project_Hippocrates_AvaloniaUI.Views.MainView"
-             x:DataType="vm:MainViewModel"
-             >
+             x:DataType="vm:MainViewModel">
   
   <Design.DataContext>
     <vm:MainViewModel />
@@ -18,9 +21,10 @@
 
       <Grid.RowDefinitions>
         <RowDefinition Height="auto"/>
-        <RowDefinition/>
+        <RowDefinition />
       </Grid.RowDefinitions>
 
+      <!--Top panel-->
       <Border Grid.Row="0" 
               Padding="10"
               Background="#C5CAE9">
@@ -39,6 +43,22 @@
         </RelativePanel>
       </Border>
 
+      <!--Body panel-->
+      <Border Grid.Row="1" 
+              Margin="0 20 0 0">
+        <ItemsRepeater ItemsSource="{Binding TestCollection}">
+          <ItemsRepeater.ItemTemplate>
+            <DataTemplate DataType="{x:Type sys:String}">
+              <gb_ctrl:GroupBox Header="{Binding}">
+                <gb_ctrl:GroupBox.Content>
+                  <sys:String>Test</sys:String>
+                </gb_ctrl:GroupBox.Content>
+              </gb_ctrl:GroupBox>
+            </DataTemplate>
+          </ItemsRepeater.ItemTemplate>
+        </ItemsRepeater>
+      </Border>
+      
     </Grid>
   </Border>
   
