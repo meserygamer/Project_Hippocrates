@@ -3,12 +3,36 @@
         xmlns:gb_ctrl="using:GroupBox.Avalonia.Controls"
         xmlns:gb_themes="using:GroupBox.Avalonia.Themes"
         xmlns:core_entities="using:Project_Hippocrates.Core.Entities"
+        xmlns:convert="using:Project_Hippocrates_AvaloniaUI.Converters"
         xmlns:sys="using:System">
 
   <Styles.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
         <ResourceInclude Source="avares://Project_Hippocrates_AvaloniaUI/Assets/Colors.axaml"/>
+        <ResourceDictionary>
+          <convert:DrugDosageConverter x:Key="DrugDosageConverter"/>
+          <DataTemplate x:Key="MedicationTimeRepeaterItemTemplate"
+                        DataType="{x:Type core_entities:MedicationTime}">
+            <gb_ctrl:GroupBox Theme="{StaticResource GroupBoxClassic}">
+
+              <gb_ctrl:GroupBox.Header>
+                <MultiBinding StringFormat="{}{0} ({1})">
+                  <Binding Path="Label"/>
+                  <Binding Path="Time"/>
+                </MultiBinding>
+              </gb_ctrl:GroupBox.Header>
+
+              <ItemsRepeater Classes="DrugDosageRepeater"
+                             ItemsSource="{Binding MedicationsTaken}"/>
+
+            </gb_ctrl:GroupBox>
+          </DataTemplate>
+          <DataTemplate x:Key="DrugDosageRepeaterItemTemplate"
+                        DataType="{x:Type core_entities:DrugDosage}">
+            <TextBlock Text="{Binding , Converter={StaticResource DrugDosageConverter}, Mode=OneWay}"/>
+          </DataTemplate>
+        </ResourceDictionary>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Styles.Resources>
@@ -39,24 +63,11 @@
   </Style>
 
   <Style Selector="ItemsRepeater.MedicationTimeRepeater">
-    <Setter Property="ItemTemplate">
-      <Setter.Value>
-        <DataTemplate DataType="{x:Type core_entities:MedicationTime}">
-          <gb_ctrl:GroupBox Theme="{StaticResource GroupBoxClassic}">
-            
-            <gb_ctrl:GroupBox.Header>
-              <MultiBinding StringFormat="{}{0} ({1})">
-                <Binding Path="Label"/>
-                <Binding Path="Time"/>
-              </MultiBinding>
-            </gb_ctrl:GroupBox.Header>
+    <Setter Property="ItemTemplate" Value="{StaticResource MedicationTimeRepeaterItemTemplate}"/>
+  </Style>
 
-            <sys:String>TestTitle</sys:String>
-            
-          </gb_ctrl:GroupBox>
-        </DataTemplate>
-      </Setter.Value>
-    </Setter>
+  <Style Selector="ItemsRepeater.DrugDosageRepeater">
+    <Setter Property="ItemTemplate" Value="{StaticResource DrugDosageRepeaterItemTemplate}"/>
   </Style>
   
 </Styles>

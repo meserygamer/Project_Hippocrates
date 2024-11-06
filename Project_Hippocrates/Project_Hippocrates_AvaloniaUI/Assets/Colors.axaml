@@ -26,7 +26,7 @@
       </Grid>
     </Border>
   </Design.PreviewWith>
-  
+
   <SolidColorBrush x:Key="PrimaryBrush" Color="#3F51B5"/>
   <SolidColorBrush x:Key="AccentBrush" Color="#FF5722"/>
   <SolidColorBrush x:Key="SecondaryBrush" Color="#C5CAE9"/>
