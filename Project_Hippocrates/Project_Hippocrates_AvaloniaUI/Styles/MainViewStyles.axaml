@@ -3,7 +3,8 @@
         xmlns:gb_ctrl="using:GroupBox.Avalonia.Controls"
         xmlns:gb_themes="using:GroupBox.Avalonia.Themes"
         xmlns:core_entities="using:Project_Hippocrates.Core.Entities"
-        xmlns:convert="using:Project_Hippocrates_AvaloniaUI.Converters"
+        xmlns:converters="using:Project_Hippocrates_AvaloniaUI.Converters"
+        xmlns:custom_controls="clr-namespace:Project_Hippocrates_AvaloniaUI.Controls"
         xmlns:sys="using:System">
 
   <Styles.Resources>
@@ -11,7 +12,7 @@
       <ResourceDictionary.MergedDictionaries>
         <ResourceInclude Source="avares://Project_Hippocrates_AvaloniaUI/Assets/Colors.axaml"/>
         <ResourceDictionary>
-          <convert:DrugDosageConverter x:Key="DrugDosageConverter"/>
+          <converters:DrugDosageConverter x:Key="DrugDosageConverter"/>
           <DataTemplate x:Key="MedicationTimeRepeaterItemTemplate"
                         DataType="{x:Type core_entities:MedicationTime}">
             <gb_ctrl:GroupBox Theme="{StaticResource GroupBoxClassic}">
@@ -32,6 +33,33 @@
                         DataType="{x:Type core_entities:DrugDosage}">
             <TextBlock Text="{Binding , Converter={StaticResource DrugDosageConverter}, Mode=OneWay}"/>
           </DataTemplate>
+          <ControlTemplate x:Key="MainSideMenuTemplate" 
+                           TargetType="{x:Type custom_controls:SideMenu}">
+            <Grid>
+
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1*"/>
+              </Grid.ColumnDefinitions>
+
+              <ContentPresenter Name="PART_ContentPresenter"
+                                Grid.ColumnSpan="2"
+                                Background="{TemplateBinding Background}"
+                                BackgroundSizing="{TemplateBinding BackgroundSizing}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                ContentTemplate="{TemplateBinding ContentTemplate}"
+                                Content="{TemplateBinding Content}"
+                                Padding="{TemplateBinding Padding}"
+                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+              
+              <ContentPresenter Name="PART_MenuContentPresenter"
+                                Content="{TemplateBinding MenuContent}"/>
+              
+            </Grid>
+          </ControlTemplate>
         </ResourceDictionary>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
@@ -68,6 +96,10 @@
 
   <Style Selector="ItemsRepeater.DrugDosageRepeater">
     <Setter Property="ItemTemplate" Value="{StaticResource DrugDosageRepeaterItemTemplate}"/>
+  </Style>
+
+  <Style Selector="custom_controls|SideMenu.MainSideMenu">
+    <Setter Property="Template" Value="{StaticResource MainSideMenuTemplate}"/>
   </Style>
   
 </Styles>

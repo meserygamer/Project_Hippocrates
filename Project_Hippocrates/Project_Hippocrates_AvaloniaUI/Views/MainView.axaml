@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Project_Hippocrates_AvaloniaUI.ViewModels"
-             
+             xmlns:custom_controls="clr-namespace:Project_Hippocrates_AvaloniaUI.Controls"
              xmlns:sys="using:System"
              d:DesignWidth="540" d:DesignHeight="1200"
              mc:Ignorable="d"
@@ -15,42 +15,75 @@
   </UserControl.Styles>
   
   <Design.DataContext>
-    <vm:MainViewModel />
+    <vm:MainViewModel/>
   </Design.DataContext>
 
-  <Border Padding="10">
-    <!--Main Grid-->
-    <Grid Name="MainGrid">
+  <custom_controls:SideMenu Classes="MainSideMenu">
 
-      <Grid.RowDefinitions>
-        <RowDefinition Height="auto"/>
-        <RowDefinition />
-      </Grid.RowDefinitions>
+    <custom_controls:SideMenu.MenuContent>
+      <Border CornerRadius="0 10 0 0"
+              Padding="10"
+              Background="Gray">
+        <Grid>
 
-      <!--Top panel-->
-      <Border Grid.Row="0" 
-              Classes="TopPanel">
-        <RelativePanel HorizontalAlignment="Stretch">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="auto"/>
+          </Grid.ColumnDefinitions>
 
-          <Button RelativePanel.AlignLeftWithPanel="True"
-                  Classes="MedicationSchedulesOpenButton"/>
+          <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+          </Grid.RowDefinitions>
 
-          <TextBlock RelativePanel.AlignRightWithPanel="True"
-                     RelativePanel.AlignVerticalCenterWithPanel="True"
-                     Text="Jeffry Cone"
-                     Classes="MedicationScheduleName"/>
-
-        </RelativePanel>
+          <TextBlock Text="Расписания лекарств"
+                     Foreground="#3F51B5"
+                     VerticalAlignment="Center"/>
+          
+          <Button Grid.Column="1"
+                  VerticalAlignment="Center"
+                  Height="20"
+                  Width="35"
+                  Background="#FF5722"/>
+          
+        </Grid>
       </Border>
+    </custom_controls:SideMenu.MenuContent>
+    
+    <Border Padding="10">
+      <!--Main Grid-->
+      <Grid Name="MainGrid">
 
-      <!--Body panel-->
-      <Border Grid.Row="1" 
-              Classes="BodyPanel">
-        <ItemsRepeater Classes="MedicationTimeRepeater"
-                       ItemsSource="{Binding TestCollection}"/>
-      </Border>
-      
-    </Grid>
-  </Border>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="auto"/>
+          <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <!--Top panel-->
+        <Border Grid.Row="0"
+                Classes="TopPanel">
+          <RelativePanel HorizontalAlignment="Stretch">
+
+            <Button RelativePanel.AlignLeftWithPanel="True"
+                    Classes="MedicationSchedulesOpenButton"/>
+
+            <TextBlock RelativePanel.AlignRightWithPanel="True"
+                       RelativePanel.AlignVerticalCenterWithPanel="True"
+                       Text="Jeffry Cone"
+                       Classes="MedicationScheduleName"/>
+
+          </RelativePanel>
+        </Border>
+
+        <!--Body panel-->
+        <Border Grid.Row="1"
+                Classes="BodyPanel">
+          <ItemsRepeater Classes="MedicationTimeRepeater"
+                         ItemsSource="{Binding TestCollection}"/>
+        </Border>
+
+      </Grid>
+    </Border>
+  </custom_controls:SideMenu>
   
 </UserControl>
