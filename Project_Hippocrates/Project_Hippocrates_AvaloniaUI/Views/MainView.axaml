@@ -18,37 +18,36 @@
     <vm:MainViewModel/>
   </Design.DataContext>
 
-  <custom_controls:SideMenu Classes="MainSideMenu">
+  <custom_controls:ContentControlWithSideMenu Name="SideMenuTest"
+                            Classes="MainSideMenu"
+                            IsMenuOpen="False">
 
-    <custom_controls:SideMenu.MenuContent>
-      <Border CornerRadius="0 10 0 0"
-              Padding="10"
-              Background="Gray">
-        <Grid>
+    <custom_controls:ContentControlWithSideMenu.MenuContent>
+      <custom_controls:SideMenuFragment>
+        <custom_controls:SideMenuFragment.Template>
+          <ControlTemplate TargetType="{x:Type custom_controls:SideMenuFragment}">
+            <Border CornerRadius="0 10 0 0"
+                    Padding="10"
+                    Background="White">
+              <Grid ColumnDefinitions="auto, *" RowDefinitions="auto, *">
 
-          <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="auto"/>
-          </Grid.ColumnDefinitions>
-
-          <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition/>
-          </Grid.RowDefinitions>
-
-          <TextBlock Text="Расписания лекарств"
-                     Foreground="#3F51B5"
-                     VerticalAlignment="Center"/>
+                <TextBlock Text="Расписания лекарств"
+                           Foreground="#3F51B5"
+                           VerticalAlignment="Center"/>
           
-          <Button Grid.Column="1"
-                  VerticalAlignment="Center"
-                  Height="20"
-                  Width="35"
-                  Background="#FF5722"/>
+                <Button Grid.Row="0" Grid.Column="1"
+                        Name="PART_CloseMenuButton"
+                        Height="20" Width="30"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Right"
+                        Background="#FF5722"/>
           
-        </Grid>
-      </Border>
-    </custom_controls:SideMenu.MenuContent>
+              </Grid>
+            </Border>
+          </ControlTemplate>
+        </custom_controls:SideMenuFragment.Template>
+      </custom_controls:SideMenuFragment>
+    </custom_controls:ContentControlWithSideMenu.MenuContent>
     
     <Border Padding="10">
       <!--Main Grid-->
@@ -65,7 +64,8 @@
           <RelativePanel HorizontalAlignment="Stretch">
 
             <Button RelativePanel.AlignLeftWithPanel="True"
-                    Classes="MedicationSchedulesOpenButton"/>
+                    Classes="MedicationSchedulesOpenButton"
+                    Click="Button_Click"/>
 
             <TextBlock RelativePanel.AlignRightWithPanel="True"
                        RelativePanel.AlignVerticalCenterWithPanel="True"
@@ -84,6 +84,6 @@
 
       </Grid>
     </Border>
-  </custom_controls:SideMenu>
+  </custom_controls:ContentControlWithSideMenu>
   
 </UserControl>

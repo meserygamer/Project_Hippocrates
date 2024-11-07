@@ -1,11 +1,13 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:gb_ctrl="using:GroupBox.Avalonia.Controls"
-        xmlns:gb_themes="using:GroupBox.Avalonia.Themes"
-        xmlns:core_entities="using:Project_Hippocrates.Core.Entities"
+        xmlns:gbCtrl="using:GroupBox.Avalonia.Controls"
+        xmlns:coreEntities="using:Project_Hippocrates.Core.Entities"
         xmlns:converters="using:Project_Hippocrates_AvaloniaUI.Converters"
-        xmlns:custom_controls="clr-namespace:Project_Hippocrates_AvaloniaUI.Controls"
-        xmlns:sys="using:System">
+        xmlns:customControls="clr-namespace:Project_Hippocrates_AvaloniaUI.Controls"
+        xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+        xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+        xmlns:sys="using:System"
+        xmlns:col="clr-namespace:System.Collections;assembly=mscorlib">
 
   <Styles.Resources>
     <ResourceDictionary>
@@ -14,33 +16,28 @@
         <ResourceDictionary>
           <converters:DrugDosageConverter x:Key="DrugDosageConverter"/>
           <DataTemplate x:Key="MedicationTimeRepeaterItemTemplate"
-                        DataType="{x:Type core_entities:MedicationTime}">
-            <gb_ctrl:GroupBox Theme="{StaticResource GroupBoxClassic}">
+                        DataType="{x:Type coreEntities:MedicationTime}">
+            <gbCtrl:GroupBox Theme="{StaticResource GroupBoxClassic}">
 
-              <gb_ctrl:GroupBox.Header>
+              <gbCtrl:GroupBox.Header>
                 <MultiBinding StringFormat="{}{0} ({1})">
                   <Binding Path="Label"/>
                   <Binding Path="Time"/>
                 </MultiBinding>
-              </gb_ctrl:GroupBox.Header>
+              </gbCtrl:GroupBox.Header>
 
               <ItemsRepeater Classes="DrugDosageRepeater"
                              ItemsSource="{Binding MedicationsTaken}"/>
 
-            </gb_ctrl:GroupBox>
+            </gbCtrl:GroupBox>
           </DataTemplate>
           <DataTemplate x:Key="DrugDosageRepeaterItemTemplate"
-                        DataType="{x:Type core_entities:DrugDosage}">
-            <TextBlock Text="{Binding , Converter={StaticResource DrugDosageConverter}, Mode=OneWay}"/>
+                        DataType="{x:Type coreEntities:DrugDosage}">
+            <TextBlock Text="{Binding ., Converter={StaticResource DrugDosageConverter}, Mode=OneWay}"/>
           </DataTemplate>
           <ControlTemplate x:Key="MainSideMenuTemplate" 
-                           TargetType="{x:Type custom_controls:SideMenu}">
-            <Grid>
-
-              <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="1*"/>
-              </Grid.ColumnDefinitions>
+                           TargetType="{x:Type customControls:ContentControlWithSideMenu}">
+            <Grid Name="SideMenuGrid" ColumnDefinitions="0*,1*">
 
               <ContentPresenter Name="PART_ContentPresenter"
                                 Grid.ColumnSpan="2"
@@ -55,12 +52,69 @@
                                 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"/>
               
-              <ContentPresenter Name="PART_MenuContentPresenter"
-                                Content="{TemplateBinding MenuContent}"/>
+              <Border Grid.ColumnSpan="2" Grid.Column="0"
+                      Name="BlackoutBorder"
+                      Background="#8F000000"/>
               
+              <ContentPresenter Grid.Column="0" Name="PART_MenuContentPresenter"
+                                Content="{TemplateBinding MenuContent}"/>
+
+              <i:Interaction.Behaviors>
+                
+                <ia:DataTriggerBehavior Binding="{Binding $parent[customControls:ContentControlWithSideMenu].IsMenuOpen}"
+                                        ComparisonCondition="Equal"
+                                        Value="{x:True}">
+                  
+                  <ia:ChangePropertyAction TargetObject="SideMenuGrid"
+                                           PropertyName="ColumnDefinitions">
+                    <ia:ChangePropertyAction.Value>
+                      <ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1*"/>
+                      </ColumnDefinitions>
+                    </ia:ChangePropertyAction.Value>
+                  </ia:ChangePropertyAction>
+                  
+                  <ia:ChangePropertyAction TargetObject="PART_MenuContentPresenter"
+                                           PropertyName="IsVisible"
+                                           Value="{x:True}"/>
+                  
+                  <ia:ChangePropertyAction TargetObject="BlackoutBorder"
+                                           PropertyName="IsVisible"
+                                           Value="{x:True}"/>
+                  
+                </ia:DataTriggerBehavior>
+
+                <ia:DataTriggerBehavior Binding="{Binding $parent[customControls:ContentControlWithSideMenu].IsMenuOpen}"
+                                        ComparisonCondition="Equal"
+                                        Value="{x:False}">
+                  
+                  <ia:ChangePropertyAction TargetObject="SideMenuGrid"
+                                           PropertyName="ColumnDefinitions">
+                    <ia:ChangePropertyAction.Value>
+                      <ColumnDefinitions>
+                        <ColumnDefinition Width="0*"/>
+                        <ColumnDefinition Width="1*"/>
+                      </ColumnDefinitions>
+                    </ia:ChangePropertyAction.Value>
+                  </ia:ChangePropertyAction>
+                  
+                  <ia:ChangePropertyAction TargetObject="PART_MenuContentPresenter"
+                                           PropertyName="IsVisible"
+                                           Value="{x:False}"/>
+                  
+                  <ia:ChangePropertyAction TargetObject="BlackoutBorder"
+                                           PropertyName="IsVisible"
+                                           Value="{x:False}"/>
+                  
+                </ia:DataTriggerBehavior>
+
+              </i:Interaction.Behaviors>
+
             </Grid>
           </ControlTemplate>
-        </ResourceDictionary>
+          
+      </ResourceDictionary>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Styles.Resources>
@@ -98,8 +152,9 @@
     <Setter Property="ItemTemplate" Value="{StaticResource DrugDosageRepeaterItemTemplate}"/>
   </Style>
 
-  <Style Selector="custom_controls|SideMenu.MainSideMenu">
+  <Style Selector="customControls|ContentControlWithSideMenu.MainSideMenu">
     <Setter Property="Template" Value="{StaticResource MainSideMenuTemplate}"/>
+    <Setter Property="IsMenuOpen" Value="False"/>
   </Style>
   
 </Styles>

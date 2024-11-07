@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="Project_Hippocrates/Project_Hippocrates_AvaloniaUI/Assets/Colors.axaml" value="Project_Hippocrates/Project_Hippocrates_AvaloniaUI.Desktop/Project_Hippocrates_AvaloniaUI.Desktop.csproj" />
+        <entry key="Project_Hippocrates/Project_Hippocrates_AvaloniaUI/Styles/MainViewStyles.axaml" value="Project_Hippocrates/Project_Hippocrates_AvaloniaUI.Desktop/Project_Hippocrates_AvaloniaUI.Desktop.csproj" />
+        <entry key="Project_Hippocrates/Project_Hippocrates_AvaloniaUI/Views/MainView.axaml" value="Project_Hippocrates/Project_Hippocrates_AvaloniaUI.Desktop/Project_Hippocrates_AvaloniaUI.Desktop.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

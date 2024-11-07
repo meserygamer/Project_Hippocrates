@@ -1,7 +1,4 @@
 using Avalonia.Controls;
-using Avalonia.Platform;
-using Avalonia.Threading;
-using System.Threading.Tasks;
 
 namespace Project_Hippocrates_AvaloniaUI.Views
 {
@@ -10,6 +7,11 @@ namespace Project_Hippocrates_AvaloniaUI.Views
         public MainView()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            SideMenuTest.IsMenuOpen = !SideMenuTest.IsMenuOpen;
         }
     }
 }
