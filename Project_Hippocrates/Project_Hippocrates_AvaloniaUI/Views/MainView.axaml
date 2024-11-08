@@ -27,7 +27,7 @@
         <custom_controls:SideMenuFragment.Template>
           <ControlTemplate TargetType="{x:Type custom_controls:SideMenuFragment}">
             <Border CornerRadius="0 10 0 0"
-                    Padding="10"
+                    Padding="10 20 10 10 "
                     Background="White">
               <Grid ColumnDefinitions="auto, *" RowDefinitions="auto, *">
 
@@ -37,10 +37,17 @@
           
                 <Button Grid.Row="0" Grid.Column="1"
                         Name="PART_CloseMenuButton"
-                        Height="20" Width="30"
+                        Height="40" Width="50"
                         VerticalAlignment="Top"
                         HorizontalAlignment="Right"
                         Background="#FF5722"/>
+                
+                <ListBox Grid.Row="1" Grid.Column="0"
+                         Grid.ColumnSpan="2"
+                         Margin="0 20 0 0"
+                         Classes="MedicationScheduleList"
+                         ItemsSource="{Binding MedicationSchedules, Mode=OneWay}"
+                         SelectedItem="{Binding SelectedMedicationSchedule, Mode=TwoWay}"/>
           
               </Grid>
             </Border>
@@ -79,7 +86,7 @@
         <Border Grid.Row="1"
                 Classes="BodyPanel">
           <ItemsRepeater Classes="MedicationTimeRepeater"
-                         ItemsSource="{Binding TestCollection}"/>
+                         ItemsSource="{Binding MedicationTimes, Mode=OneWay}"/>
         </Border>
 
       </Grid>

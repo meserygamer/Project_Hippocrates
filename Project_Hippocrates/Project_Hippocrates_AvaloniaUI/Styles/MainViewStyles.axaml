@@ -14,7 +14,9 @@
       <ResourceDictionary.MergedDictionaries>
         <ResourceInclude Source="avares://Project_Hippocrates_AvaloniaUI/Assets/Colors.axaml"/>
         <ResourceDictionary>
+          
           <converters:DrugDosageConverter x:Key="DrugDosageConverter"/>
+          
           <DataTemplate x:Key="MedicationTimeRepeaterItemTemplate"
                         DataType="{x:Type coreEntities:MedicationTime}">
             <gbCtrl:GroupBox Theme="{StaticResource GroupBoxClassic}">
@@ -31,10 +33,12 @@
 
             </gbCtrl:GroupBox>
           </DataTemplate>
+          
           <DataTemplate x:Key="DrugDosageRepeaterItemTemplate"
                         DataType="{x:Type coreEntities:DrugDosage}">
             <TextBlock Text="{Binding ., Converter={StaticResource DrugDosageConverter}, Mode=OneWay}"/>
           </DataTemplate>
+          
           <ControlTemplate x:Key="MainSideMenuTemplate" 
                            TargetType="{x:Type customControls:ContentControlWithSideMenu}">
             <Grid Name="SideMenuGrid" ColumnDefinitions="0*,1*">
@@ -114,7 +118,15 @@
             </Grid>
           </ControlTemplate>
           
-      </ResourceDictionary>
+          <DataTemplate x:Key="MedicationScheduleListItemTemplate"
+                        DataType="{x:Type coreEntities:MedicationSchedule}">
+            <Border Padding="10" 
+                    HorizontalAlignment="Stretch">
+              <TextBlock Text="{Binding Name}"/>
+            </Border>
+          </DataTemplate>
+          
+        </ResourceDictionary>
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Styles.Resources>
@@ -155,6 +167,10 @@
   <Style Selector="customControls|ContentControlWithSideMenu.MainSideMenu">
     <Setter Property="Template" Value="{StaticResource MainSideMenuTemplate}"/>
     <Setter Property="IsMenuOpen" Value="False"/>
+  </Style>
+  
+  <Style Selector="ListBox.MedicationScheduleList">
+    <Setter Property="ItemTemplate" Value="{StaticResource MedicationScheduleListItemTemplate}"/>
   </Style>
   
 </Styles>

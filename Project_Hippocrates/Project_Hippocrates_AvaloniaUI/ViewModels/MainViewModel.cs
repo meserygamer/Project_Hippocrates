@@ -6,19 +6,46 @@ namespace Project_Hippocrates_AvaloniaUI.ViewModels
 {
     public partial class MainViewModel : ViewModelBase
     {
-        [ObservableProperty]
-        private ObservableCollection<MedicationTime> _testCollection = [
+        [ObservableProperty] private ObservableCollection<MedicationSchedule> _medicationSchedules;
+        [ObservableProperty] private ObservableCollection<MedicationTime>? _medicationTimes;
+        
+        private MedicationSchedule? _selectedMedicationSchedule;
+        
+        public MainViewModel()
+        {
+            ObservableCollection<DrugDosage> drugDosages = [
+                new DrugDosage() { Drug = new MedicalDrug() { Name = "Test Drug 1" }, DosageValue=1, DosageUnit="т." },
+                new DrugDosage() { Drug = new MedicalDrug() { Name = "Test Drug 2" }, DosageValue=12, DosageUnit="кап." },
+                new DrugDosage() { Drug = new MedicalDrug() { Name = "Test Drug 3" }, DosageValue=25, DosageUnit="мл." },
+            ];
             
-            new MedicationTime { Label = "Label1", Time = new System.TimeOnly(12, 0), MedicationsTaken = _testCollection2 },
-            new MedicationTime { Label = "Label2", Time = new System.TimeOnly(14, 0), MedicationsTaken = _testCollection2 },
-            new MedicationTime { Label = "Label3", Time = new System.TimeOnly(16, 0), MedicationsTaken = _testCollection2 },
+            ObservableCollection<MedicationTime> medicationTimes = [
+                new MedicationTime { Label = "Label1", Time = new System.TimeOnly(12, 0), MedicationsTaken = drugDosages },
+                new MedicationTime { Label = "Label2", Time = new System.TimeOnly(14, 0), MedicationsTaken = drugDosages },
+                new MedicationTime { Label = "Label3", Time = new System.TimeOnly(16, 0), MedicationsTaken = drugDosages },
+            ];
+            
+            _medicationSchedules = [
+                new MedicationSchedule() {Id = 1, MedicationTimes = [medicationTimes[0], medicationTimes[1]], Name = "TestSchedule_1"},
+                new MedicationSchedule() {Id = 2, MedicationTimes = [medicationTimes[2]], Name = "TestSchedule_2"}
             ];
 
-        private static ObservableCollection<DrugDosage> _testCollection2 = [
+            SelectedMedicationSchedule = _medicationSchedules[0];
+        }
 
-            new DrugDosage() { Drug = new MedicalDrug() { Name = "Test Drug 1" }, DosageValue=1, DosageUnit="т." },
-            new DrugDosage() { Drug = new MedicalDrug() { Name = "Test Drug 2" }, DosageValue=12, DosageUnit="кап." },
-            new DrugDosage() { Drug = new MedicalDrug() { Name = "Test Drug 3" }, DosageValue=25, DosageUnit="мл." },
-            ];
+        public MedicationSchedule? SelectedMedicationSchedule
+        {
+            get => _selectedMedicationSchedule;
+            set
+            {
+                SetProperty(ref _selectedMedicationSchedule, value);
+                OnSelectedMedicationScheduleChanged();
+            }
+        }
+
+        private void OnSelectedMedicationScheduleChanged()
+        {
+            MedicationTimes = new ObservableCollection<MedicationTime>(SelectedMedicationSchedule?.MedicationTimes ?? []);
+        }
     }
 }
