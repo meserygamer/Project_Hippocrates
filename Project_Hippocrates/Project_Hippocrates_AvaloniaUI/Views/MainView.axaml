@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Project_Hippocrates_AvaloniaUI.ViewModels"
-             xmlns:custom_controls="clr-namespace:Project_Hippocrates_AvaloniaUI.Controls"
+             xmlns:customControls="clr-namespace:Project_Hippocrates_AvaloniaUI.Controls"
              xmlns:sys="using:System"
              d:DesignWidth="540" d:DesignHeight="1200"
              mc:Ignorable="d"
@@ -18,14 +18,14 @@
     <vm:MainViewModel/>
   </Design.DataContext>
 
-  <custom_controls:ContentControlWithSideMenu Name="SideMenuTest"
+  <customControls:ContentControlWithSideMenu Name="SideMenuTest"
                             Classes="MainSideMenu"
                             IsMenuOpen="False">
 
-    <custom_controls:ContentControlWithSideMenu.MenuContent>
-      <custom_controls:SideMenuFragment>
-        <custom_controls:SideMenuFragment.Template>
-          <ControlTemplate TargetType="{x:Type custom_controls:SideMenuFragment}">
+    <customControls:ContentControlWithSideMenu.MenuContent>
+      <customControls:SideMenuFragment>
+        <customControls:SideMenuFragment.Template>
+          <ControlTemplate TargetType="{x:Type customControls:SideMenuFragment}">
             <Border CornerRadius="0 10 0 0"
                     Padding="10 20 10 10 "
                     Background="White">
@@ -52,9 +52,9 @@
               </Grid>
             </Border>
           </ControlTemplate>
-        </custom_controls:SideMenuFragment.Template>
-      </custom_controls:SideMenuFragment>
-    </custom_controls:ContentControlWithSideMenu.MenuContent>
+        </customControls:SideMenuFragment.Template>
+      </customControls:SideMenuFragment>
+    </customControls:ContentControlWithSideMenu.MenuContent>
     
     <Border Padding="10">
       <!--Main Grid-->
@@ -91,6 +91,6 @@
 
       </Grid>
     </Border>
-  </custom_controls:ContentControlWithSideMenu>
+  </customControls:ContentControlWithSideMenu>
   
 </UserControl>

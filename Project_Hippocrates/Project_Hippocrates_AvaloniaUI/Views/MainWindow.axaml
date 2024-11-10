@@ -11,7 +11,7 @@
         Title="Project_Hippocrates_AvaloniaUI">
 
     <ContentControl>
-      <views:MainView/>
+      <views:EditMedicationTimeView/>
     </ContentControl>
   
 </Window>
