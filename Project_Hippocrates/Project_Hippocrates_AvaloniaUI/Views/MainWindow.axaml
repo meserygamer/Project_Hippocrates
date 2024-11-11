@@ -3,6 +3,7 @@
         xmlns:vm="using:Project_Hippocrates_AvaloniaUI.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="using:Project_Hippocrates_AvaloniaUI.ViewModels"
         xmlns:views="clr-namespace:Project_Hippocrates_AvaloniaUI.Views"
         Width="540" Height="1200"
         mc:Ignorable="d" d:DesignWidth="540" d:DesignHeight="1200"
@@ -11,7 +12,11 @@
         Title="Project_Hippocrates_AvaloniaUI">
 
     <ContentControl>
-      <views:EditMedicationTimeView/>
+      <views:EditMedicationTimeView>
+          <views:EditMedicationTimeView.DataContext>
+              <viewModels:EditMedicationTimeViewModel></viewModels:EditMedicationTimeViewModel>
+          </views:EditMedicationTimeView.DataContext>
+      </views:EditMedicationTimeView>
     </ContentControl>
   
 </Window>

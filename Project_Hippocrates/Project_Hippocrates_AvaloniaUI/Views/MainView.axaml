@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:Project_Hippocrates_AvaloniaUI.ViewModels"
              xmlns:customControls="clr-namespace:Project_Hippocrates_AvaloniaUI.Controls"
-             xmlns:sys="using:System"
              d:DesignWidth="540" d:DesignHeight="1200"
              mc:Ignorable="d"
              x:Class="Project_Hippocrates_AvaloniaUI.Views.MainView"
