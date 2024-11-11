@@ -1,4 +1,4 @@
-﻿namespace Project_Hippocrates_AvaloniaUI.Models;
+﻿namespace Project_Hippocrates_AvaloniaUI.Models.EntityPresenters;
 
 public class DrugDosagePresenter
 {
