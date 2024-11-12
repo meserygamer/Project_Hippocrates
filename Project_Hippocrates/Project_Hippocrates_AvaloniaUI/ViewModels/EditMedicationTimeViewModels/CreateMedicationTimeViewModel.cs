@@ -1,4 +1,6 @@
-﻿using Project_Hippocrates_AvaloniaUI.Models.EditMedicationTimeModels;
+﻿using System;
+using System.Threading.Tasks;
+using Project_Hippocrates_AvaloniaUI.Models.EditMedicationTimeModels;
 using Project_Hippocrates_AvaloniaUI.Models.EntityPresenters;
 
 namespace Project_Hippocrates_AvaloniaUI.ViewModels.EditMedicationTimeViewModels;
@@ -17,8 +19,13 @@ public class CreateMedicationTimeViewModel : EditMedicationTimeViewModelBase
 
     public override string ViewLabel => "Создание";
 
-    public override void OnSubmit()
+    public override async Task OnSubmitAsync()
     {
-        
+        if (!await _model.TryCreateMedicationTimeModel(base.MedicationTimePresenter))
+        {
+            //TODO Create false branch
+        }
+        //TODO Create true branch
+        throw new NotImplementedException();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Project_Hippocrates_AvaloniaUI.Models.EntityPresenters;
 
 namespace Project_Hippocrates_AvaloniaUI.ViewModels.EditMedicationTimeViewModels;
@@ -58,7 +59,7 @@ public abstract class EditMedicationTimeViewModelBase : ViewModelBase
     public virtual void OnAddEmptyDrugDosage()
         => MedicationTimeDrugDosages.Add(new DrugDosagePresenter());
 
-    public abstract void OnSubmit();
+    public abstract Task OnSubmitAsync();
 
     #endregion
 }
