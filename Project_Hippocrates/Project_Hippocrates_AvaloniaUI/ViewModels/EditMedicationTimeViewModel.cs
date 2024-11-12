@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
-using Project_Hippocrates_AvaloniaUI.Models;
 using Project_Hippocrates_AvaloniaUI.Models.EntityPresenters;
 
 namespace Project_Hippocrates_AvaloniaUI.ViewModels;

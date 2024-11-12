@@ -1,29 +1,64 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using Project_Hippocrates_AvaloniaUI.Models;
 using Project_Hippocrates_AvaloniaUI.Models.EntityPresenters;
 
 namespace Project_Hippocrates_AvaloniaUI.ViewModels.EditMedicationTimeViewModels;
 
 public abstract class EditMedicationTimeViewModelBase : ViewModelBase
 {
-    #region Properties
+    #region Fields
+    
+    private DrugDosagePresenter? _selectedDrugDosage;
 
-    public virtual string ViewLabel { get; protected set; } = "Заголовок";
-    public abstract string? MedicationTimeLabel { get; set; }
-    public abstract TimeSpan? MedicationTimeAppointmentTime { get; set; }
-    public abstract ObservableCollection<DrugDosagePresenter> MedicationTimeDrugDosages { get; set; }
-    public abstract DrugDosagePresenter? SelectedDrugDosage { get; set; }
+    #endregion
+
+    protected EditMedicationTimeViewModelBase(MedicationTimePresenter medicationTimePresenter)
+    {
+        MedicationTimePresenter = medicationTimePresenter;
+    }
+    
+    #region Properties
+    
+    public virtual string ViewLabel => "Заголовок";
+    public virtual MedicationTimePresenter MedicationTimePresenter { get; }
+    public virtual string? MedicationTimeLabel
+    {
+        get => MedicationTimePresenter.Label;
+        set => SetProperty(MedicationTimePresenter.Label, value, MedicationTimePresenter, (d, v) => d.Label = v ?? string.Empty);
+    }
+    public virtual TimeSpan? MedicationTimeAppointmentTime
+    {
+        get => MedicationTimePresenter.Time;
+        set => SetProperty(MedicationTimePresenter.Time, value, MedicationTimePresenter, (d, v) => 
+        {
+            if(v is null)
+                return;
+            d.Time = (TimeSpan)v;
+        });
+    }
+    public virtual ObservableCollection<DrugDosagePresenter> MedicationTimeDrugDosages
+    {
+        get => MedicationTimePresenter.MedicationsTaken;
+        set => SetProperty(MedicationTimePresenter.MedicationsTaken, value, MedicationTimePresenter,
+            (d, v) => d.MedicationsTaken = v);
+    }
+    public virtual DrugDosagePresenter? SelectedDrugDosage
+    {
+        get => _selectedDrugDosage;
+        set => SetProperty(ref _selectedDrugDosage, value);
+    }
 
     #endregion
 
     #region Methods
 
-    public virtual void RemoveSelectedDrugDosage()
+    public virtual void OnRemoveSelectedDrugDosage()
         => MedicationTimeDrugDosages.Remove(SelectedDrugDosage!);
     
-    public virtual void AddEmptyDrugDosage()
+    public virtual void OnAddEmptyDrugDosage()
         => MedicationTimeDrugDosages.Add(new DrugDosagePresenter());
+
+    public abstract void OnSubmit();
 
     #endregion
 }
