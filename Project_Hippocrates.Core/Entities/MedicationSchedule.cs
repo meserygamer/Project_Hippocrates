@@ -5,7 +5,7 @@ public class MedicationSchedule
     /// <summary>
     /// Medication schedule id
     /// </summary>
-    public int Id { get; set; }
+    public Guid Id { get; set; }
 
     /// <summary>
     /// Medication schedule name

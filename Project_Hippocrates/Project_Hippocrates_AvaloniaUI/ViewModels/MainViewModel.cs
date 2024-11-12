@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System;
+using CommunityToolkit.Mvvm.ComponentModel;
 using Project_Hippocrates.Core.Entities;
 using System.Collections.ObjectModel;
 
@@ -14,9 +15,9 @@ namespace Project_Hippocrates_AvaloniaUI.ViewModels
         public MainViewModel()
         {
             ObservableCollection<DrugDosage> drugDosages = [
-                new DrugDosage() { Drug = new MedicalDrug() { Name = "Test Drug 1" }, DosageValue=1, DosageUnit="т." },
-                new DrugDosage() { Drug = new MedicalDrug() { Name = "Test Drug 2" }, DosageValue=12, DosageUnit="кап." },
-                new DrugDosage() { Drug = new MedicalDrug() { Name = "Test Drug 3" }, DosageValue=25, DosageUnit="мл." },
+                new DrugDosage { Drug = new MedicalDrug() { Name = "Test Drug 1" }, DosageValue=1, DosageUnit="т." },
+                new DrugDosage { Drug = new MedicalDrug() { Name = "Test Drug 2" }, DosageValue=12, DosageUnit="кап." },
+                new DrugDosage { Drug = new MedicalDrug() { Name = "Test Drug 3" }, DosageValue=25, DosageUnit="мл." },
             ];
             
             ObservableCollection<MedicationTime> medicationTimes = [
@@ -26,8 +27,8 @@ namespace Project_Hippocrates_AvaloniaUI.ViewModels
             ];
             
             _medicationSchedules = [
-                new MedicationSchedule() {Id = 1, MedicationTimes = [medicationTimes[0], medicationTimes[1]], Name = "TestSchedule_1"},
-                new MedicationSchedule() {Id = 2, MedicationTimes = [medicationTimes[2]], Name = "TestSchedule_2"}
+                new MedicationSchedule {Id = Guid.NewGuid(), MedicationTimes = [medicationTimes[0], medicationTimes[1]], Name = "TestSchedule_1"},
+                new MedicationSchedule {Id = Guid.NewGuid(), MedicationTimes = [medicationTimes[2]], Name = "TestSchedule_2"}
             ];
 
             SelectedMedicationSchedule = _medicationSchedules[0];
