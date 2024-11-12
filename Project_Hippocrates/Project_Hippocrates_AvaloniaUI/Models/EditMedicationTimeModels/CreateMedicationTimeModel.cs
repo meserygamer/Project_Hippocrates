@@ -2,12 +2,8 @@
 
 namespace Project_Hippocrates_AvaloniaUI.Models.EditMedicationTimeModels;
 
-public class CreateMedicationTimeModel
+public class CreateMedicationTimeModel : ModelBase<CreateMedicationTimeViewModel>
 {
-    public CreateMedicationTimeModel(CreateMedicationTimeViewModel viewModel)
-    {
-        ViewModel = viewModel;
-    }
-
-    public CreateMedicationTimeViewModel ViewModel { get; set; }
+    public CreateMedicationTimeModel() : base() { }
+    public CreateMedicationTimeModel(CreateMedicationTimeViewModel vm) : base(vm) { }
 }
