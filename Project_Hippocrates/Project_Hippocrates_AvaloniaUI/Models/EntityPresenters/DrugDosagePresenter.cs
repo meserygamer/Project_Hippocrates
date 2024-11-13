@@ -3,6 +3,6 @@
 public class DrugDosagePresenter
 {
     public string DrugName { get; set; } = null!;
-    public uint DrugDose { get; set; }
+    public uint DrugDoseValue { get; set; }
     public string DoseUnit { get; set; } = null!;
 }

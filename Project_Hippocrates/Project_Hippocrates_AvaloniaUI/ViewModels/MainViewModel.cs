@@ -15,15 +15,15 @@ namespace Project_Hippocrates_AvaloniaUI.ViewModels
         public MainViewModel()
         {
             ObservableCollection<DrugDosage> drugDosages = [
-                new DrugDosage { Drug = new MedicalDrug() { Name = "Test Drug 1" }, DosageValue=1, DosageUnit="т." },
-                new DrugDosage { Drug = new MedicalDrug() { Name = "Test Drug 2" }, DosageValue=12, DosageUnit="кап." },
-                new DrugDosage { Drug = new MedicalDrug() { Name = "Test Drug 3" }, DosageValue=25, DosageUnit="мл." },
+                new DrugDosage { Drug = new MedicalDrug() { Name = "Test Drug 1" }, DrugDoseValue=1, DoseUnit="т." },
+                new DrugDosage { Drug = new MedicalDrug() { Name = "Test Drug 2" }, DrugDoseValue=12, DoseUnit="кап." },
+                new DrugDosage { Drug = new MedicalDrug() { Name = "Test Drug 3" }, DrugDoseValue=25, DoseUnit="мл." },
             ];
             
             ObservableCollection<MedicationTime> medicationTimes = [
-                new MedicationTime { Label = "Label1", Time = new System.TimeOnly(12, 0), MedicationsTaken = drugDosages },
-                new MedicationTime { Label = "Label2", Time = new System.TimeOnly(14, 0), MedicationsTaken = drugDosages },
-                new MedicationTime { Label = "Label3", Time = new System.TimeOnly(16, 0), MedicationsTaken = drugDosages },
+                new MedicationTime { Label = "Label1", Time = new TimeSpan(12,0,0), MedicationsTaken = drugDosages },
+                new MedicationTime { Label = "Label2", Time = new TimeSpan(14,0,0), MedicationsTaken = drugDosages },
+                new MedicationTime { Label = "Label3", Time = new TimeSpan(16,0,0), MedicationsTaken = drugDosages },
             ];
             
             _medicationSchedules = [

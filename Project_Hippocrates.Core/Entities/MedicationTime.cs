@@ -10,12 +10,12 @@ public class MedicationTime
     /// <summary>
     /// Medication time label
     /// </summary>
-    public string Label { get; set; } = null!;
+    public string Label { get; set; } = String.Empty;
 
     /// <summary>
     /// Time to take medication
     /// </summary>
-    public TimeOnly Time { get; set; }
+    public TimeSpan Time { get; set; } = TimeSpan.Zero;
 
     /// <summary>
     /// Medications taken at this time

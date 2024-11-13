@@ -19,7 +19,7 @@ public class DrugDosageConverter : IValueConverter
             throw new NotSupportedException("DrugDosageConverter not support this convertion type");
 
         DrugDosage dosage = (DrugDosage)value;
-        return $"{dosage.Drug.Name} ({dosage.DosageValue} {dosage.DosageUnit})";
+        return $"{dosage.Drug.Name} ({dosage.DrugDoseValue} {dosage.DoseUnit})";
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

@@ -15,10 +15,10 @@ public class DrugDosage
     /// <summary>
     /// Drug dosage value
     /// </summary>
-    public int DosageValue { get; set; }
+    public uint DrugDoseValue { get; set; }
 
     /// <summary>
     /// Unit of drug dosage value
     /// </summary>
-    public string DosageUnit { get; set; } = null!;
+    public string DoseUnit { get; set; } = null!;
 }

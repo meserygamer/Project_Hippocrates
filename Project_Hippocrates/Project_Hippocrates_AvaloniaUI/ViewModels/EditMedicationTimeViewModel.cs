@@ -18,10 +18,10 @@ public partial class EditMedicationTimeViewModel : ViewModelBase
     [ObservableProperty]
     private ObservableCollection<DrugDosagePresenter> _dosagePresenters = 
     [
-        new (){DrugName = "Drug 1", DrugDose = 10, DoseUnit = "т."},
-        new (){DrugName = "Drug 2", DrugDose = 30, DoseUnit = "т."},
-        new (){DrugName = "Drug 1", DrugDose = 10, DoseUnit = "т."},
-        new (){DrugName = "Drug 2", DrugDose = 30, DoseUnit = "т."}
+        new (){DrugName = "Drug 1", DrugDoseValue = 10, DoseUnit = "т."},
+        new (){DrugName = "Drug 2", DrugDoseValue = 30, DoseUnit = "т."},
+        new (){DrugName = "Drug 1", DrugDoseValue = 10, DoseUnit = "т."},
+        new (){DrugName = "Drug 2", DrugDoseValue = 30, DoseUnit = "т."}
     ];
 
     [ObservableProperty]

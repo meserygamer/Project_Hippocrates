@@ -25,13 +25,13 @@
         
         <DataTemplate x:Key="DrugDosageColumnCellTemplate"
                       DataType="{x:Type entityPresenters:DrugDosagePresenter}">
-            <TextBlock Text="{Binding DrugDose}"
+            <TextBlock Text="{Binding DrugDoseValue}"
                        VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </DataTemplate>
         
         <DataTemplate x:Key="DrugDosageColumnCellEditingTemplate"
                       DataType="{x:Type entityPresenters:DrugDosagePresenter}">
-            <NumericUpDown Value="{Binding DrugDose}"
+            <NumericUpDown Value="{Binding DrugDoseValue}"
                            HorizontalAlignment="Center" VerticalAlignment="Center"
                            Minimum="0" FormatString="N0"/>
         </DataTemplate>

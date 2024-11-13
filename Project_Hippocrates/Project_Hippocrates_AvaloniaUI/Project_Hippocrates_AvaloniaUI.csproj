@@ -24,6 +24,7 @@
     <PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.2.0" />
     <PackageReference Include="BinToss.GroupBox.Avalonia" Version="1.0.0" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.1" />
+    <PackageReference Include="Mapster" Version="7.4.0" />
   </ItemGroup>
 
   <ItemGroup>
