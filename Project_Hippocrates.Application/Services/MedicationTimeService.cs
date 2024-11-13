@@ -17,8 +17,8 @@ public class MedicationTimeService
     public bool SaveMedicationTimeChanges(MedicationTime medicationTime)
         => _repository.Save(medicationTime);
     
-    public Task<bool> CreateMedicationTimeAsync(MedicationTime medicationTime)
-        => _repository.AddAsync(medicationTime);
-    public Task<bool> SaveMedicationTimeChangesAsync(MedicationTime medicationTime)
-        => _repository.SaveAsync(medicationTime);
+    public async Task<bool> CreateMedicationTimeAsync(MedicationTime medicationTime)
+        => await _repository.AddAsync(medicationTime);
+    public async Task<bool> SaveMedicationTimeChangesAsync(MedicationTime medicationTime)
+        => await _repository.SaveAsync(medicationTime);
 }
