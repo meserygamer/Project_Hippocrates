@@ -28,6 +28,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Project_Hippocrates.Application\Project_Hippocrates.Application.csproj" />
     <ProjectReference Include="..\..\Project_Hippocrates.Core\Project_Hippocrates.Core.csproj" />
   </ItemGroup>
 </Project>
