@@ -1,5 +1,7 @@
 ﻿using Avalonia;
 using System;
+using Microsoft.Extensions.DependencyInjection;
+using Project_Hippocrates_AvaloniaUI.Extensions;
 
 namespace Project_Hippocrates_AvaloniaUI.Desktop
 {
@@ -14,9 +16,20 @@ namespace Project_Hippocrates_AvaloniaUI.Desktop
 
         // Avalonia configuration, don't remove; also used by visual designer.
         public static AppBuilder BuildAvaloniaApp()
-            => AppBuilder.Configure<App>()
+            => AppBuilder.Configure<App>(() => new App(InitializeDesktopServiceCollection(new ServiceCollection())))
                 .UsePlatformDetect()
                 .WithInterFont()
                 .LogToTrace();
+
+        public static IServiceCollection InitializeDesktopServiceCollection(IServiceCollection serviceCollection)
+        {
+            return serviceCollection.AddViews()
+                                    .AddViewModels()
+                                    .AddModels()
+                                    .AddApplicationLayerServices()
+                                    .AddDataRepositories()
+                                    .AddMapper()
+                                    .AddSingleton<INativeNotificator, DesktopNotificator>();
+        }
     }
 }
