@@ -126,7 +126,7 @@
             
             <!--Submit button panel-->
             <Grid Grid.Row="3" 
-                  ColumnDefinitions="*, 2*, *"
+                  ColumnDefinitions="*, 4*, *"
                   Classes="SubmitButtonPanel">
                 <Button Grid.Column="1"
                         Classes="SubmitButton"
