@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Project_Hippocrates_AvaloniaUI.Models.EntityPresenters;
 
-namespace Project_Hippocrates_AvaloniaUI.ViewModels.EditMedicationTimeViewModels;
+namespace Project_Hippocrates_AvaloniaUI.ViewModels;
 
 public abstract class EditMedicationTimeViewModelBase : ViewModelBase
 {
@@ -49,6 +49,17 @@ public abstract class EditMedicationTimeViewModelBase : ViewModelBase
         set => SetProperty(ref _selectedDrugDosage, value);
     }
 
+    public string ViewModelName = typeof(EditMedicationTimeViewModelBase).FullName!
+        .Replace("Base", "", StringComparison.Ordinal);
+    
+    public ObservableCollection<string> AllowableDosageUnits { get; } =
+    [
+        "т.",
+        "мг.",
+        "мл.",
+        "кап."
+    ];
+
     #endregion
 
     #region Methods
@@ -59,7 +70,7 @@ public abstract class EditMedicationTimeViewModelBase : ViewModelBase
     public virtual void OnAddEmptyDrugDosage()
         => MedicationTimeDrugDosages.Add(new DrugDosagePresenter());
 
-    public abstract Task OnSubmitAsync();
+    public virtual async Task OnSubmitAsync() { }
 
     #endregion
 }
