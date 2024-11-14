@@ -16,7 +16,7 @@ public class CreateMedicationTimeViewModel : EditMedicationTimeViewModelBase
     {
         _model = model;
         _model.ViewModel = this;
-        _serviceProvider = App.Services;
+        _serviceProvider = App.Current!.Services;
         _nativeNotificator = _serviceProvider.GetService<INativeNotificator>()!;
     }
 

@@ -10,7 +10,7 @@ namespace Project_Hippocrates_AvaloniaUI
 {
     public partial class App : Application
     {
-        private static IServiceCollection _serviceCollection = new ServiceCollection();
+        private IServiceCollection _serviceCollection = new ServiceCollection();
 
         public App() { }
         public App(IServiceCollection serviceCollection)
@@ -18,7 +18,9 @@ namespace Project_Hippocrates_AvaloniaUI
             _serviceCollection = serviceCollection;
         }
         
-        public static ServiceProvider Services => _serviceCollection.BuildServiceProvider();
+        public ServiceProvider Services => _serviceCollection.BuildServiceProvider();
+
+        public new static App? Current => (App?)Application.Current;
 
         public override void Initialize()
         {
@@ -39,9 +41,9 @@ namespace Project_Hippocrates_AvaloniaUI
             }
             else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
             {
-                singleViewPlatform.MainView = new MainView
+                singleViewPlatform.MainView = new EditMedicationTimeView()
                 {
-                    DataContext = new MainViewModel()
+                    DataContext = Services.GetService<CreateMedicationTimeViewModel>()
                 };
             }
 

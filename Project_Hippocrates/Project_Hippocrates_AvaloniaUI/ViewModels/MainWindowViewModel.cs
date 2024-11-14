@@ -13,7 +13,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
     public MainWindowViewModel()
     {
-        _serviceProvider = App.Services;
+        _serviceProvider = App.Current!.Services;
         CreateMedicationTimeViewModel? vm = _serviceProvider.GetService<CreateMedicationTimeViewModel>();
         if (vm is null)
             throw new ArgumentNullException();
