@@ -14,5 +14,5 @@ public class AndroidNotificator : INativeNotificator
     }
     
     public async Task SendMessageAsync(string message) 
-        => Toast.MakeText(_context, message, ToastLength.Long);
+        => Toast.MakeText(_context, message, ToastLength.Long)!.Show();
 }
