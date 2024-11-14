@@ -22,6 +22,22 @@ namespace Project_Hippocrates_AvaloniaUI
 
             return new TextBlock { Text = "Not Found: " + name };
         }
+        
+        public Control? Build(string? viewModelName)
+        {
+            if (viewModelName is null)
+                return null;
+
+            var name = viewModelName.Replace("ViewModel", "View", StringComparison.Ordinal);
+            var type = Type.GetType(name);
+
+            if (type != null)
+            {
+                return (Control)Activator.CreateInstance(type)!;
+            }
+
+            return new TextBlock { Text = "Not Found: " + name };
+        }
 
         public bool Match(object? data)
         {
