@@ -5,7 +5,7 @@
              xmlns:gbCtrl="using:GroupBox.Avalonia.Controls"
              xmlns:models="using:Project_Hippocrates_AvaloniaUI.Models"
              xmlns:viewModels="using:Project_Hippocrates_AvaloniaUI.ViewModels"
-             xmlns:editMedicationTimeViewModels="using:Project_Hippocrates_AvaloniaUI.ViewModels.EditMedicationTimeViewModels"
+             xmlns:editMedicationTimeViewModels="using:Project_Hippocrates_AvaloniaUI.ViewModels"
              xmlns:sys="using:System"
              xmlns:entityPresenters="clr-namespace:Project_Hippocrates_AvaloniaUI.Models.EntityPresenters"
              mc:Ignorable="d" 
@@ -114,11 +114,11 @@
                     
                     <!--Add medications taken button-->
                     <Button Classes="MedicationTakenControlButton AddMedicationTakenButton"
-                            Command="{Binding AddDrugDosagePresenter}"/>
+                            Command="{Binding OnAddEmptyDrugDosage}"/>
                     
                     <!--Remove medications taken button-->
                     <Button Classes="MedicationTakenControlButton RemoveMedicationTakenButton"
-                            Command="{Binding RemoveDrugDosagePresenter}"/>
+                            Command="{Binding OnRemoveSelectedDrugDosage}"/>
                     
                 </StackPanel>
                 
@@ -129,7 +129,8 @@
                   ColumnDefinitions="*, 2*, *"
                   Classes="SubmitButtonPanel">
                 <Button Grid.Column="1"
-                        Classes="SubmitButton"/>
+                        Classes="SubmitButton"
+                        Command="{Binding OnSubmitAsync}"/>
             </Grid>
         
         </Grid>

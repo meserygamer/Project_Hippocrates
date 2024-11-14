@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using Project_Hippocrates_AvaloniaUI.Models.EditMedicationTimeModels;
 using Project_Hippocrates_AvaloniaUI.Models.EntityPresenters;
 
-namespace Project_Hippocrates_AvaloniaUI.ViewModels.EditMedicationTimeViewModels;
+namespace Project_Hippocrates_AvaloniaUI.ViewModels;
 
 public class EditExistingMedicationTimeViewModel : EditMedicationTimeViewModelBase
 {
