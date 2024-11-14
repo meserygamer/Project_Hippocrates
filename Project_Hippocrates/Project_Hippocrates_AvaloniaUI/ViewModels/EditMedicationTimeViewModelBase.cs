@@ -10,27 +10,42 @@ public abstract class EditMedicationTimeViewModelBase : ViewModelBase
     #region Fields
     
     private DrugDosagePresenter? _selectedDrugDosage;
+    private MedicationTimePresenter _displayedMedicationTime;
 
     #endregion
 
-    protected EditMedicationTimeViewModelBase(MedicationTimePresenter medicationTimePresenter)
+    #region Constructors
+
+    protected EditMedicationTimeViewModelBase(MedicationTimePresenter displayedMedicationTime)
     {
-        MedicationTimePresenter = medicationTimePresenter;
+        _displayedMedicationTime = displayedMedicationTime;
     }
+
+    protected EditMedicationTimeViewModelBase()
+    {
+        _displayedMedicationTime = new MedicationTimePresenter();
+    }
+
+    #endregion
     
     #region Properties
     
     public virtual string ViewLabel => "Заголовок";
-    public virtual MedicationTimePresenter MedicationTimePresenter { get; }
+
+    public MedicationTimePresenter DisplayedMedicationTime
+    {
+        get => _displayedMedicationTime; 
+        protected set => SetProperty(ref _displayedMedicationTime, value);
+    }
     public virtual string? MedicationTimeLabel
     {
-        get => MedicationTimePresenter.Label;
-        set => SetProperty(MedicationTimePresenter.Label, value, MedicationTimePresenter, (d, v) => d.Label = v ?? string.Empty);
+        get => DisplayedMedicationTime.Label;
+        set => SetProperty(DisplayedMedicationTime.Label, value, DisplayedMedicationTime, (d, v) => d.Label = v ?? string.Empty);
     }
     public virtual TimeSpan? MedicationTimeAppointmentTime
     {
-        get => MedicationTimePresenter.Time;
-        set => SetProperty(MedicationTimePresenter.Time, value, MedicationTimePresenter, (d, v) => 
+        get => DisplayedMedicationTime.Time;
+        set => SetProperty(DisplayedMedicationTime.Time, value, DisplayedMedicationTime, (d, v) => 
         {
             if(v is null)
                 return;
@@ -39,8 +54,8 @@ public abstract class EditMedicationTimeViewModelBase : ViewModelBase
     }
     public virtual ObservableCollection<DrugDosagePresenter> MedicationTimeDrugDosages
     {
-        get => MedicationTimePresenter.MedicationsTaken;
-        set => SetProperty(MedicationTimePresenter.MedicationsTaken, value, MedicationTimePresenter,
+        get => DisplayedMedicationTime.MedicationsTaken;
+        set => SetProperty(DisplayedMedicationTime.MedicationsTaken, value, DisplayedMedicationTime,
             (d, v) => d.MedicationsTaken = v);
     }
     public virtual DrugDosagePresenter? SelectedDrugDosage

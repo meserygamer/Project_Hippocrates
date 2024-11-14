@@ -3,10 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:gbCtrl="using:GroupBox.Avalonia.Controls"
-             xmlns:models="using:Project_Hippocrates_AvaloniaUI.Models"
-             xmlns:viewModels="using:Project_Hippocrates_AvaloniaUI.ViewModels"
              xmlns:editMedicationTimeViewModels="using:Project_Hippocrates_AvaloniaUI.ViewModels"
-             xmlns:sys="using:System"
              xmlns:entityPresenters="clr-namespace:Project_Hippocrates_AvaloniaUI.Models.EntityPresenters"
              mc:Ignorable="d" 
              Name="MainUserControl"
@@ -14,7 +11,7 @@
              x:Class="Project_Hippocrates_AvaloniaUI.Views.EditMedicationTimeView">
     
     <Design.DataContext>
-        <editMedicationTimeViewModels:EditMedicationTimeViewModelBase/>
+        <editMedicationTimeViewModels:CreateMedicationTimeViewModel/>
     </Design.DataContext>
     
     <UserControl.Styles>

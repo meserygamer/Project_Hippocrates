@@ -8,24 +8,36 @@ namespace Project_Hippocrates_AvaloniaUI.ViewModels;
 public class EditExistingMedicationTimeViewModel : EditMedicationTimeViewModelBase
 {
     private EditExistingMedicationTimeModel _model;
+    private INativeNotificator _nativeNotificator;
     
-    public EditExistingMedicationTimeViewModel(MedicationTimePresenter medicationTimePresenter,
-        EditExistingMedicationTimeModel model) 
-        : base(medicationTimePresenter)
+    public EditExistingMedicationTimeViewModel(EditExistingMedicationTimeModel model,
+        INativeNotificator nativeNotificator) 
+        : base()
     {
         _model = model;
         _model.ViewModel = this;
+        _nativeNotificator = nativeNotificator;
     }
 
     public override string ViewLabel => "Редактирование";
 
     public override async Task OnSubmitAsync()
     {
-        if (!await _model.TrySaveMedicationTimeChanges(base.MedicationTimePresenter))
+        try
         {
-            //TODO Create false branch
+            if (!await _model.TrySaveMedicationTimeChanges(base.DisplayedMedicationTime))
+            {
+                //TODO True branch
+            }
+            //TODO False branch
         }
-        //TODO Create true branch
-        throw new NotImplementedException();
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        await _nativeNotificator.SendMessageAsync("Проверка связи");
     }
+
+    public void SetChangingMedicationTime(MedicationTimePresenter value)
+        => base.DisplayedMedicationTime = value;
 }

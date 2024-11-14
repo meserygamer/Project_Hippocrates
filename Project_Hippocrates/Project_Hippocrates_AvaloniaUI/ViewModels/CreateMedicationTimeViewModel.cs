@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
 using Project_Hippocrates_AvaloniaUI.Models.EditMedicationTimeModels;
 
 namespace Project_Hippocrates_AvaloniaUI.ViewModels;
@@ -8,16 +7,15 @@ namespace Project_Hippocrates_AvaloniaUI.ViewModels;
 public class CreateMedicationTimeViewModel : EditMedicationTimeViewModelBase
 {
     private CreateMedicationTimeModel _model;
-    private IServiceProvider _serviceProvider;
     private INativeNotificator _nativeNotificator;
     
-    public CreateMedicationTimeViewModel(CreateMedicationTimeModel model) 
+    public CreateMedicationTimeViewModel(CreateMedicationTimeModel model,
+        INativeNotificator nativeNotificator) 
         : base(new ()) 
     {
         _model = model;
         _model.ViewModel = this;
-        _serviceProvider = App.Current!.Services;
-        _nativeNotificator = _serviceProvider.GetService<INativeNotificator>()!;
+        _nativeNotificator = nativeNotificator;
     }
 
     public override string ViewLabel => "Создание";
@@ -26,7 +24,7 @@ public class CreateMedicationTimeViewModel : EditMedicationTimeViewModelBase
     {
         try
         {
-            if (!await _model.TryCreateMedicationTimeModel(base.MedicationTimePresenter))
+            if (!await _model.TryCreateMedicationTimeModel(base.DisplayedMedicationTime))
             {
                 //TODO True branch
             }
