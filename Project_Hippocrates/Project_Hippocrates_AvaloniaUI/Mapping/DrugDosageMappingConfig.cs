@@ -10,6 +10,7 @@ public class DrugDosageMappingConfig : IRegister
     {
         config.NewConfig<DrugDosagePresenter, DrugDosage>()
             .BeforeMapping(dest => dest.Drug = new MedicalDrug())
+            .Map(dest => dest.Id, src => src.DrugId)
             .Map(dest => dest.Drug.Name, src => src.DrugName)
             .Map(dest => dest.DrugDoseValue, src => src.DrugDoseValue)
             .Map(dest => dest.DoseUnit, src => src.DoseUnit);
