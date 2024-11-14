@@ -1,4 +1,5 @@
 ﻿using Android.App;
+using Android.Content;
 using Android.Content.PM;
 using Avalonia;
 using Avalonia.Android;
@@ -15,14 +16,6 @@ namespace Project_Hippocrates_AvaloniaUI.Android
         ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize | ConfigChanges.UiMode)]
     public class MainActivity : AvaloniaMainActivity<App>
     {
-        private IServiceCollection _serviceCollection;
-        
-        public MainActivity()
-        {
-            _serviceCollection = new ServiceCollection();
-            InitializeAndroidServiceCollection();
-        }
-        
         protected override AppBuilder CustomizeAppBuilder(AppBuilder builder)
         {
             return base.CustomizeAppBuilder(builder)
@@ -31,18 +24,21 @@ namespace Project_Hippocrates_AvaloniaUI.Android
 
         protected override AppBuilder CreateAppBuilder()
         {
-            return AppBuilder.Configure<App>(() => new App(_serviceCollection));
+            return AppBuilder.Configure<App>(() =>
+                new App(InitializeAndroidServiceCollection(new ServiceCollection())
+                )).UseAndroid();
         }
 
-        private void InitializeAndroidServiceCollection()
+        private IServiceCollection InitializeAndroidServiceCollection(IServiceCollection serviceCollection)
         {
-            _serviceCollection.AddViews()
-                              .AddViewModels()
-                              .AddModels()
-                              .AddApplicationLayerServices()
-                              .AddDataRepositories()
-                              .AddMapper()
-                              .AddSingleton<INativeNotificator, AndroidNotificator>();
+            return serviceCollection.AddViews()
+                                    .AddViewModels()
+                                    .AddModels()
+                                    .AddApplicationLayerServices()
+                                    .AddDataRepositories()
+                                    .AddMapper()
+                                    .AddSingleton<Context>(this.ApplicationContext!)
+                                    .AddSingleton<INativeNotificator, AndroidNotificator>();
         }
     }
 }
