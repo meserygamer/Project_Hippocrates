@@ -36,7 +36,7 @@ namespace Project_Hippocrates_AvaloniaUI
                 BindingPlugins.DataValidators.RemoveAt(0);
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = new MainWindowViewModel()
+                    DataContext = Services.GetService<MainWindowViewModel>()
                 };
             }
             else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
