@@ -24,6 +24,7 @@ public static class ServiceCollectionExtensions
     {
         return serviceCollection.AddTransient<CreateMedicationTimeViewModel>()
                                 .AddTransient<EditExistingMedicationTimeViewModel>()
+                                .AddTransient<MainWindowViewModel>()
                                 .AddTransient<MainViewModel>();
     }
 
@@ -41,6 +42,11 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddDataRepositories(this IServiceCollection serviceCollection)
     {
         return serviceCollection.AddSingleton<IDomainEntityRepository<MedicationTime>>(provider => null); //TODO Add repository as soon ready
+    }
+
+    public static IServiceCollection AddViewLocator(this IServiceCollection serviceCollection)
+    {
+        return serviceCollection.AddSingleton<ViewLocator>();
     }
 
     public static IServiceCollection AddMapper(this IServiceCollection serviceCollection)
