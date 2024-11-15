@@ -63,10 +63,9 @@ public abstract class EditMedicationTimeViewModelBase : ViewModelBase
         get => _selectedDrugDosage;
         set => SetProperty(ref _selectedDrugDosage, value);
     }
+    public override string? ViewModelFullName { get; } = typeof(EditMedicationTimeViewModelBase).FullName!
+        .Replace("EditMedicationTimeViewModelBase", "EditMedicationTimeViewModel", StringComparison.Ordinal);
 
-    public string ViewModelName = typeof(EditMedicationTimeViewModelBase).FullName!
-        .Replace("Base", "", StringComparison.Ordinal);
-    
     public ObservableCollection<string> AllowableDosageUnits { get; } =
     [
         "т.",
