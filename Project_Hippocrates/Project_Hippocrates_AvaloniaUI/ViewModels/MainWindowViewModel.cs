@@ -1,23 +1,33 @@
 ﻿using System;
 using Avalonia.Controls;
-using CommunityToolkit.Mvvm.ComponentModel;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Project_Hippocrates_AvaloniaUI.ViewModels;
 
-public partial class MainWindowViewModel : ViewModelBase
+public class MainWindowViewModel : ViewModelBase
 {
-    [ObservableProperty]
+    private IServiceProvider _serviceProvider;
+    private ViewLocator _viewLocator;
+    
     private Control? _showingView;
-    private ServiceProvider _serviceProvider;
 
-    public MainWindowViewModel()
+    public MainWindowViewModel(IServiceProvider serviceProvider,
+        ViewLocator viewLocator)
     {
-        _serviceProvider = App.Current!.Services;
-        CreateMedicationTimeViewModel? vm = _serviceProvider.GetService<CreateMedicationTimeViewModel>();
-        if (vm is null)
-            throw new ArgumentNullException();
-        ShowingView = new ViewLocator().Build(vm.ViewModelName);
-        ShowingView!.DataContext = vm;
+        _serviceProvider = serviceProvider;
+        _viewLocator = viewLocator;
+        SetShowingView(typeof(CreateMedicationTimeViewModel));
+    }
+
+    public Control? ShowingView
+    {
+        get => _showingView;
+        private set => SetProperty(ref _showingView, value, nameof(ShowingView));
+    }
+
+    public void SetShowingView(Type viewModelType)
+    {
+        var vm = _serviceProvider.GetService(viewModelType) 
+                                 ?? throw new ArgumentOutOfRangeException(nameof(viewModelType), "not compatible viewModel type");
+        ShowingView = _viewLocator.BuildViewWithDataContext((ViewModelBase)vm);
     }
 }
