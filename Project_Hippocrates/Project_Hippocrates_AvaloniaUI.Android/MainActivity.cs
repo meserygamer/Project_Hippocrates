@@ -37,6 +37,7 @@ namespace Project_Hippocrates_AvaloniaUI.Android
                                     .AddApplicationLayerServices()
                                     .AddDataRepositories()
                                     .AddMapper()
+                                    .AddViewLocator()
                                     .AddSingleton<Context>(this.ApplicationContext!)
                                     .AddSingleton<INativeNotificator, AndroidNotificator>();
         }
