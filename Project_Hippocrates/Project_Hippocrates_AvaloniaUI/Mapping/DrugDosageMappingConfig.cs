@@ -14,5 +14,11 @@ public class DrugDosageMappingConfig : IRegister
             .Map(dest => dest.Drug.Name, src => src.DrugName)
             .Map(dest => dest.DrugDoseValue, src => src.DrugDoseValue)
             .Map(dest => dest.DoseUnit, src => src.DoseUnit);
+        
+        config.NewConfig<DrugDosage, DrugDosagePresenter>()
+            .Map(dest => dest.DrugId, src => src.Id)
+            .Map(dest => dest.DrugName, src => src.Drug.Name)
+            .Map(dest => dest.DrugDoseValue, src => src.DrugDoseValue)
+            .Map(dest => dest.DoseUnit, src => src.DoseUnit);
     }
 }
