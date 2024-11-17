@@ -14,13 +14,13 @@ public class MedicationTimeService
 
     public bool CreateMedicationTime(MedicationTime medicationTime)
         => _repository.Add(medicationTime);
-    public bool SaveMedicationTimeChanges(MedicationTime medicationTime)
-        => _repository.Save(medicationTime);
+    public bool ChangeEntityById(Guid guid, MedicationTime medicationTime)
+        => _repository.ChangeEntityById(guid, medicationTime);
     
     public async Task<bool> CreateMedicationTimeAsync(MedicationTime medicationTime)
         => await _repository.AddAsync(medicationTime);
-    public async Task<bool> SaveMedicationTimeChangesAsync(MedicationTime medicationTime)
-        => await _repository.SaveAsync(medicationTime);
+    public async Task<bool> ChangeEntityByIdAsync(Guid guid, MedicationTime medicationTime)
+        => await _repository.ChangeEntityByIdAsync(guid, medicationTime);
     public async Task<MedicationTime?> FindMedicationTimeByIdAsync(Guid id)
         => await _repository.GetByIdAsync(id);
 }

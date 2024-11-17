@@ -24,7 +24,7 @@ public class EditExistingMedicationTimeModel : ModelBase<EditExistingMedicationT
     public async Task<bool> TrySaveMedicationTimeChangesAsync(MedicationTimePresenter presenter)
     {
         MedicationTime medicationTime = _mapper.Map<MedicationTime>(presenter);
-        return await _medicationTimeService.SaveMedicationTimeChangesAsync(medicationTime);
+        return await _medicationTimeService.ChangeEntityByIdAsync(medicationTime.Id, medicationTime);
     }
 
     public async Task<MedicationTimePresenter> FindMedicationTimeByIdAsync(Guid id)
