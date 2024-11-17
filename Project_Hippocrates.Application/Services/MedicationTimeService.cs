@@ -21,4 +21,6 @@ public class MedicationTimeService
         => await _repository.AddAsync(medicationTime);
     public async Task<bool> SaveMedicationTimeChangesAsync(MedicationTime medicationTime)
         => await _repository.SaveAsync(medicationTime);
+    public async Task<MedicationTime?> FindMedicationTimeByIdAsync(Guid id)
+        => await _repository.GetByIdAsync(id);
 }

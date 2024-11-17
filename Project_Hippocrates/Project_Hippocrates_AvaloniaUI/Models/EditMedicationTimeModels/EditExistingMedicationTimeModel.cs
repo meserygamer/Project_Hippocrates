@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using MapsterMapper;
 using Project_Hippocrates_AvaloniaUI.Models.EntityPresenters;
 using Project_Hippocrates_AvaloniaUI.ViewModels;
@@ -20,9 +21,16 @@ public class EditExistingMedicationTimeModel : ModelBase<EditExistingMedicationT
         _medicationTimeService = medicationTimeService;
     }
 
-    public async Task<bool> TrySaveMedicationTimeChanges(MedicationTimePresenter presenter)
+    public async Task<bool> TrySaveMedicationTimeChangesAsync(MedicationTimePresenter presenter)
     {
         MedicationTime medicationTime = _mapper.Map<MedicationTime>(presenter);
         return await _medicationTimeService.SaveMedicationTimeChangesAsync(medicationTime);
+    }
+
+    public async Task<MedicationTimePresenter> FindMedicationTimeByIdAsync(Guid id)
+    {
+        MedicationTime findingResult = await _medicationTimeService.FindMedicationTimeByIdAsync(id) 
+                                       ?? throw new NullReferenceException($"Medication with id - {id} not find!");
+        return _mapper.Map<MedicationTimePresenter>(findingResult);
     }
 }
