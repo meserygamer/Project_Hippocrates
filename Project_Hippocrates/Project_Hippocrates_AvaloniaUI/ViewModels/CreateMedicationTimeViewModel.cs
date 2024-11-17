@@ -26,14 +26,14 @@ public class CreateMedicationTimeViewModel : EditMedicationTimeViewModelBase
         {
             if (!await _model.TryCreateMedicationTimeModel(base.DisplayedMedicationTime))
             {
-                //TODO True branch
+                await _nativeNotificator.SendMessageAsync("Время приёма лекарств успешно создано");
             }
-            //TODO False branch
+            await _nativeNotificator.SendMessageAsync("Создание не удалось");
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
+            await _nativeNotificator.SendMessageAsync("Что-то пошло не так!");
         }
-        await _nativeNotificator.SendMessageAsync("Проверка связи");
     }
 }

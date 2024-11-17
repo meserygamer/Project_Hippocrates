@@ -25,19 +25,22 @@ public class EditExistingMedicationTimeViewModel : EditMedicationTimeViewModelBa
     {
         try
         {
-            if (!await _model.TrySaveMedicationTimeChanges(base.DisplayedMedicationTime))
+            if (!await _model.TrySaveMedicationTimeChangesAsync(base.DisplayedMedicationTime))
             {
-                //TODO True branch
+                await _nativeNotificator.SendMessageAsync("Информация успешно изменена!");
             }
-            //TODO False branch
+            await _nativeNotificator.SendMessageAsync("Изменить информацию неудалось!");
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
+            await _nativeNotificator.SendMessageAsync("Что-то пошло не так!");
         }
-        await _nativeNotificator.SendMessageAsync("Проверка связи");
     }
 
     public void SetChangingMedicationTime(MedicationTimePresenter value)
         => base.DisplayedMedicationTime = value;
+
+    public async Task SetChangingMedicationTimeByIdAsync(Guid id)
+        => base.DisplayedMedicationTime = await _model.FindMedicationTimeByIdAsync(id);
 }
