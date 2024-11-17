@@ -8,6 +8,7 @@ using Project_Hippocrates_AvaloniaUI.Views;
 using Project_Hippocrates.Application.Services;
 using Project_Hippocrates.Core;
 using Project_Hippocrates.Core.Entities;
+using Project_Hippocrates.TestEntityRepositories.Repositories;
 
 namespace Project_Hippocrates_AvaloniaUI.Extensions;
 
@@ -56,5 +57,13 @@ public static class ServiceCollectionExtensions
         serviceCollection.AddSingleton<TypeAdapterConfig>(config);
         serviceCollection.AddSingleton<IMapper, ServiceMapper>();
         return serviceCollection;
+    }
+
+    public static IServiceCollection AddTestRepositories(this IServiceCollection serviceCollection)
+    {
+        return serviceCollection.AddTransient<IDomainEntityRepository<DrugDosage>, DrugDosageRepository>()
+                                .AddTransient<IDomainEntityRepository<MedicalDrug>, MedicalDrugRepository>()
+                                .AddTransient<IDomainEntityRepository<MedicationSchedule>, MedicationScheduleRepository>()
+                                .AddTransient<IDomainEntityRepository<MedicationTime>, MedicationTimeRepository>();
     }
 }

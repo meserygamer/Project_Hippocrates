@@ -29,6 +29,7 @@ namespace Project_Hippocrates_AvaloniaUI.Desktop
                                     .AddApplicationLayerServices()
                                     .AddDataRepositories()
                                     .AddViewLocator()
+                                    .AddTestRepositories()
                                     .AddMapper()
                                     .AddSingleton<INativeNotificator, DesktopNotificator>();
         }
