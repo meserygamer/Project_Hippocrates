@@ -2,9 +2,9 @@ using Avalonia.Controls;
 
 namespace Project_Hippocrates_AvaloniaUI.Views
 {
-    public partial class MainView : UserControl
+    public partial class UsersMedicationSchedulesListView : UserControl
     {
-        public MainView()
+        public UsersMedicationSchedulesListView()
         {
             InitializeComponent();
         }

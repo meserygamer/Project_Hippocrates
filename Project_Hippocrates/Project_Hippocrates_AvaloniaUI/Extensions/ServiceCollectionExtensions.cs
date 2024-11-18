@@ -17,7 +17,7 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddViews(this IServiceCollection serviceCollection)
     {
         return serviceCollection.AddTransient<EditMedicationTimeView>()
-                                .AddTransient<MainView>()
+                                .AddTransient<UsersMedicationSchedulesListView>()
                                 .AddTransient<MainWindow>();
     }
 
@@ -26,7 +26,7 @@ public static class ServiceCollectionExtensions
         return serviceCollection.AddTransient<CreateMedicationTimeViewModel>()
                                 .AddTransient<EditExistingMedicationTimeViewModel>()
                                 .AddTransient<MainWindowViewModel>()
-                                .AddTransient<MainViewModel>();
+                                .AddTransient<UsersMedicationSchedulesListViewModel>();
     }
 
     public static IServiceCollection AddModels(this IServiceCollection serviceCollection)
