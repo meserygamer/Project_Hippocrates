@@ -6,15 +6,15 @@
              xmlns:customControls="clr-namespace:Project_Hippocrates_AvaloniaUI.Controls"
              d:DesignWidth="540" d:DesignHeight="1200"
              mc:Ignorable="d"
-             x:Class="Project_Hippocrates_AvaloniaUI.Views.MainView"
-             x:DataType="vm:MainViewModel">
+             x:Class="Project_Hippocrates_AvaloniaUI.Views.UsersMedicationSchedulesListView"
+             x:DataType="vm:UsersMedicationSchedulesListViewModel">
 
   <UserControl.Styles>
     <StyleInclude Source="/Styles/MainViewStyles.axaml"/>
   </UserControl.Styles>
   
   <Design.DataContext>
-    <vm:MainViewModel/>
+    <vm:UsersMedicationSchedulesListViewModel/>
   </Design.DataContext>
 
   <customControls:ContentControlWithSideMenu Name="SideMenuTest"
