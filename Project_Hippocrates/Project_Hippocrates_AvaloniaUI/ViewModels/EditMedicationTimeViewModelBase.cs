@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Project_Hippocrates_AvaloniaUI.Models.EntityPresenters;
+using Project_Hippocrates_AvaloniaUI.Models.DTOs;
 
 namespace Project_Hippocrates_AvaloniaUI.ViewModels;
 
@@ -9,21 +9,21 @@ public abstract class EditMedicationTimeViewModelBase : ViewModelBase
 {
     #region Fields
     
-    private DrugDosagePresenter? _selectedDrugDosage;
-    private MedicationTimePresenter _displayedMedicationTime;
+    private DrugDosageDTO? _selectedDrugDosage;
+    private MedicationTimeDTO _displayedMedicationTime;
 
     #endregion
 
     #region Constructors
 
-    protected EditMedicationTimeViewModelBase(MedicationTimePresenter displayedMedicationTime)
+    protected EditMedicationTimeViewModelBase(MedicationTimeDTO displayedMedicationTime)
     {
         _displayedMedicationTime = displayedMedicationTime;
     }
 
     protected EditMedicationTimeViewModelBase()
     {
-        _displayedMedicationTime = new MedicationTimePresenter();
+        _displayedMedicationTime = new MedicationTimeDTO();
     }
 
     #endregion
@@ -32,7 +32,7 @@ public abstract class EditMedicationTimeViewModelBase : ViewModelBase
     
     public virtual string ViewLabel => "Заголовок";
 
-    public MedicationTimePresenter DisplayedMedicationTime
+    public MedicationTimeDTO DisplayedMedicationTime
     {
         get => _displayedMedicationTime; 
         protected set => SetProperty(ref _displayedMedicationTime, value);
@@ -52,13 +52,13 @@ public abstract class EditMedicationTimeViewModelBase : ViewModelBase
             d.Time = (TimeSpan)v;
         });
     }
-    public virtual ObservableCollection<DrugDosagePresenter> MedicationTimeDrugDosages
+    public virtual ObservableCollection<DrugDosageDTO> MedicationTimeDrugDosages
     {
         get => DisplayedMedicationTime.MedicationsTaken;
         set => SetProperty(DisplayedMedicationTime.MedicationsTaken, value, DisplayedMedicationTime,
             (d, v) => d.MedicationsTaken = v);
     }
-    public virtual DrugDosagePresenter? SelectedDrugDosage
+    public virtual DrugDosageDTO? SelectedDrugDosage
     {
         get => _selectedDrugDosage;
         set => SetProperty(ref _selectedDrugDosage, value);
@@ -82,7 +82,7 @@ public abstract class EditMedicationTimeViewModelBase : ViewModelBase
         => MedicationTimeDrugDosages.Remove(SelectedDrugDosage!);
     
     public virtual void OnAddEmptyDrugDosage()
-        => MedicationTimeDrugDosages.Add(new DrugDosagePresenter());
+        => MedicationTimeDrugDosages.Add(new DrugDosageDTO());
 
     public virtual async Task OnSubmitAsync() { }
 

@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:gbCtrl="using:GroupBox.Avalonia.Controls"
              xmlns:editMedicationTimeViewModels="using:Project_Hippocrates_AvaloniaUI.ViewModels"
-             xmlns:entityPresenters="clr-namespace:Project_Hippocrates_AvaloniaUI.Models.EntityPresenters"
+             xmlns:dtOs="clr-namespace:Project_Hippocrates_AvaloniaUI.Models.DTOs"
              mc:Ignorable="d" 
              Name="MainUserControl"
              d:DesignWidth="540" d:DesignHeight="1200"
@@ -21,26 +21,26 @@
     <UserControl.Resources>
         
         <DataTemplate x:Key="DrugDosageColumnCellTemplate"
-                      DataType="{x:Type entityPresenters:DrugDosagePresenter}">
+                      DataType="{x:Type dtOs:DrugDosageDTO}">
             <TextBlock Text="{Binding DrugDoseValue}"
                        VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </DataTemplate>
         
         <DataTemplate x:Key="DrugDosageColumnCellEditingTemplate"
-                      DataType="{x:Type entityPresenters:DrugDosagePresenter}">
+                      DataType="{x:Type dtOs:DrugDosageDTO}">
             <NumericUpDown Value="{Binding DrugDoseValue}"
                            HorizontalAlignment="Center" VerticalAlignment="Center"
                            Minimum="0" FormatString="N0"/>
         </DataTemplate>
         
         <DataTemplate x:Key="DrugUnitColumnCellTemplate"
-                      DataType="{x:Type entityPresenters:DrugDosagePresenter}">
+                      DataType="{x:Type dtOs:DrugDosageDTO}">
             <TextBlock Text="{Binding DoseUnit}"
                        VerticalAlignment="Center" HorizontalAlignment="Center"/>
         </DataTemplate>
         
         <DataTemplate x:Key="DrugUnitColumnCellEditingTemplate"
-                      DataType="{x:Type entityPresenters:DrugDosagePresenter}">
+                      DataType="{x:Type dtOs:DrugDosageDTO}">
             <ComboBox SelectedItem="{Binding DoseUnit}"
                       HorizontalAlignment="Center" VerticalAlignment="Center"
                       ItemsSource="{Binding DataContext.AllowableDosageUnits, ElementName=MainUserControl}"/>

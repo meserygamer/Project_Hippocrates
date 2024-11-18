@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Project_Hippocrates_AvaloniaUI.Models.EntityPresenters;
+namespace Project_Hippocrates_AvaloniaUI.Models.DTOs;
 
-public class DrugDosagePresenter
+public class DrugDosageDTO
 {
     public Guid DrugId { get; set; }
     public string DrugName { get; set; } = null!;
