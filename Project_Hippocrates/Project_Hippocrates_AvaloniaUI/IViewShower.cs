@@ -5,5 +5,6 @@ namespace Project_Hippocrates_AvaloniaUI;
 
 public interface IViewShower
 {
-    Task ChangeShowingViewAsync(Type viewModelType, Bundle? data);
+    Task ShowViewAsync(Type viewModelType, Bundle? data);
+    Task ShowPreviousViewAsync();
 }

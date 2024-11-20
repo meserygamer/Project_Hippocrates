@@ -16,6 +16,7 @@ namespace Project_Hippocrates_AvaloniaUI
         public App() { }
         public App(IServiceCollection serviceCollection)
         {
+            serviceCollection.AddSingleton<Application>(this);
             _serviceCollection = serviceCollection;
         }
         
@@ -35,7 +36,6 @@ namespace Project_Hippocrates_AvaloniaUI
                 // Line below is needed to remove Avalonia data validation.
                 // Without this line you will get duplicate validations from both Avalonia and CT
                 BindingPlugins.DataValidators.RemoveAt(0);
-                _serviceCollection.AddSingleton<IClassicDesktopStyleApplicationLifetime>(desktop);
                 desktop.MainWindow = new MainWindow
                 {
                     DataContext = Services.GetService<MainWindowViewModel>()
@@ -43,14 +43,13 @@ namespace Project_Hippocrates_AvaloniaUI
             }
             else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
             {
-                _serviceCollection.AddSingleton<ISingleViewApplicationLifetime>(singleViewPlatform);
                 singleViewPlatform.MainView = new EditMedicationTimeView()
                 {
                     DataContext = Services.GetService<CreateMedicationTimeViewModel>()
                 };
             }
             var viewShower = Services.GetService<IViewShower>();
-            viewShower?.ChangeShowingViewAsync(typeof(CreateMedicationTimeViewModel), new Bundle());
+            viewShower?.ShowViewAsync(typeof(CreateMedicationTimeViewModel), new Bundle());
             base.OnFrameworkInitializationCompleted();
         }
     }
