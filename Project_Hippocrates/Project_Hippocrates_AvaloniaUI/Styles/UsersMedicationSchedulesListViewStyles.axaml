@@ -1,7 +1,7 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:gbCtrl="using:GroupBox.Avalonia.Controls"
-        xmlns:coreEntities="using:Project_Hippocrates.Core.Entities"
+        xmlns:dtos="using:Project_Hippocrates_AvaloniaUI.Models.DTOs"
         xmlns:converters="using:Project_Hippocrates_AvaloniaUI.Converters"
         xmlns:customControls="clr-namespace:Project_Hippocrates_AvaloniaUI.Controls"
         xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
@@ -18,7 +18,7 @@
           <converters:DrugDosageConverter x:Key="DrugDosageConverter"/>
           
           <DataTemplate x:Key="MedicationTimeRepeaterItemTemplate"
-                        DataType="{x:Type coreEntities:MedicationTime}">
+                        DataType="{x:Type dtos:MedicationTimeDTO}">
             <gbCtrl:GroupBox Theme="{StaticResource GroupBoxClassic}">
 
               <gbCtrl:GroupBox.Header>
@@ -35,7 +35,7 @@
           </DataTemplate>
           
           <DataTemplate x:Key="DrugDosageRepeaterItemTemplate"
-                        DataType="{x:Type coreEntities:DrugDosage}">
+                        DataType="{x:Type dtos:DrugDosageDTO}">
             <TextBlock Text="{Binding ., Converter={StaticResource DrugDosageConverter}, Mode=OneWay}"/>
           </DataTemplate>
           
@@ -119,10 +119,10 @@
           </ControlTemplate>
           
           <DataTemplate x:Key="MedicationScheduleListItemTemplate"
-                        DataType="{x:Type coreEntities:MedicationSchedule}">
+                        DataType="{x:Type dtos:MedicationScheduleDTO}">
             <Border Padding="10" 
                     HorizontalAlignment="Stretch">
-              <TextBlock Text="{Binding Name}"/>
+              <TextBlock Text="{Binding Path=Name}"/>
             </Border>
           </DataTemplate>
           

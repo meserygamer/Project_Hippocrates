@@ -1,7 +1,7 @@
 ﻿using Avalonia.Data.Converters;
-using Project_Hippocrates.Core.Entities;
 using System;
 using System.Globalization;
+using Project_Hippocrates_AvaloniaUI.Models.DTOs;
 
 namespace Project_Hippocrates_AvaloniaUI.Converters;
 
@@ -12,14 +12,14 @@ public class DrugDosageConverter : IValueConverter
         if (value is null)
             return string.Empty;
 
-        if (value is not DrugDosage)
-            throw new NotSupportedException("Value is not DrugDosage");
+        if (value is not DrugDosageDTO)
+            throw new NotSupportedException("Value is not DrugDosageDTO");
 
         if (targetType != typeof(string))
             throw new NotSupportedException("DrugDosageConverter not support this convertion type");
 
-        DrugDosage dosage = (DrugDosage)value;
-        return $"{dosage.Drug.Name} ({dosage.DrugDoseValue} {dosage.DoseUnit})";
+        DrugDosageDTO dosage = (DrugDosageDTO)value;
+        return $"- {dosage.DrugName} ({dosage.DrugDoseValue} {dosage.DoseUnit})";
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
