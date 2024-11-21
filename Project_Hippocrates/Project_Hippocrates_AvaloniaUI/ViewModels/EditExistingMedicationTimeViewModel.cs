@@ -14,8 +14,9 @@ public class EditExistingMedicationTimeViewModel : EditMedicationTimeViewModelBa
     #endregion
     
     public EditExistingMedicationTimeViewModel(EditExistingMedicationTimeModel model,
-        INativeNotificator nativeNotificator) 
-        : base()
+        INativeNotificator nativeNotificator,
+        IViewShower viewShower) 
+        : base(new (), viewShower)
     {
         _model = model;
         _model.ViewModel = this;

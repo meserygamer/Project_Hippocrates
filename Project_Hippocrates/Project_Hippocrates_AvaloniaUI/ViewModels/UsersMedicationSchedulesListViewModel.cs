@@ -17,12 +17,21 @@ namespace Project_Hippocrates_AvaloniaUI.ViewModels
         private MedicationScheduleDTO? _selectedMedicationSchedule;
 
         #endregion
-        
+
+        #region Constructors
+
         public UsersMedicationSchedulesListViewModel(UsersMedicationSchedulesListModel model)
         {
             _model = model;
             _model.ViewModel = this;
         }
+
+        /// <summary>
+        /// Only for design mode
+        /// </summary>
+        public UsersMedicationSchedulesListViewModel() { }
+
+        #endregion
 
         #region Implementation ViewModelBase
 

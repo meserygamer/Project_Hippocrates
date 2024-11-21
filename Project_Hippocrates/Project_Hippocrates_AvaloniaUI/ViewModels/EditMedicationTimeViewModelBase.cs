@@ -8,6 +8,8 @@ namespace Project_Hippocrates_AvaloniaUI.ViewModels;
 public abstract class EditMedicationTimeViewModelBase : ViewModelBase
 {
     #region Fields
+
+    protected readonly IViewShower ViewShower; 
     
     private DrugDosageDTO? _selectedDrugDosage;
     private MedicationTimeDTO _displayedMedicationTime;
@@ -16,14 +18,11 @@ public abstract class EditMedicationTimeViewModelBase : ViewModelBase
 
     #region Constructors
 
-    protected EditMedicationTimeViewModelBase(MedicationTimeDTO displayedMedicationTime)
+    protected EditMedicationTimeViewModelBase(MedicationTimeDTO displayedMedicationTime,
+        IViewShower viewShower)
     {
+        ViewShower = viewShower;
         _displayedMedicationTime = displayedMedicationTime;
-    }
-
-    protected EditMedicationTimeViewModelBase()
-    {
-        _displayedMedicationTime = new MedicationTimeDTO();
     }
 
     #endregion
@@ -85,6 +84,11 @@ public abstract class EditMedicationTimeViewModelBase : ViewModelBase
         => MedicationTimeDrugDosages.Add(new DrugDosageDTO());
 
     public virtual async Task OnSubmitAsync() { }
+
+    public virtual async Task OnBackButtonClick()
+    {
+        await ViewShower.ShowPreviousViewAsync();
+    }
 
     #endregion
 }

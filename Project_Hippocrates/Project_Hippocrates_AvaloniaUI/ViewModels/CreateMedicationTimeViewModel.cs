@@ -10,13 +10,19 @@ public class CreateMedicationTimeViewModel : EditMedicationTimeViewModelBase
     private INativeNotificator _nativeNotificator;
     
     public CreateMedicationTimeViewModel(CreateMedicationTimeModel model,
-        INativeNotificator nativeNotificator) 
-        : base(new ()) 
+        INativeNotificator nativeNotificator,
+        IViewShower viewShower) 
+        : base(new (), viewShower) 
     {
         _model = model;
         _model.ViewModel = this;
         _nativeNotificator = nativeNotificator;
     }
+
+    /// <summary>
+    /// Only for design mode
+    /// </summary>
+    public CreateMedicationTimeViewModel() : base(new (), null!) { }
 
     public override string ViewLabel => "Создание";
 
