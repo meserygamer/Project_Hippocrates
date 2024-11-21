@@ -2,6 +2,7 @@
 using Mapster;
 using MapsterMapper;
 using Microsoft.Extensions.DependencyInjection;
+using Project_Hippocrates_AvaloniaUI.Models;
 using Project_Hippocrates_AvaloniaUI.Models.EditMedicationTimeModels;
 using Project_Hippocrates_AvaloniaUI.ViewModels;
 using Project_Hippocrates_AvaloniaUI.Views;
@@ -32,12 +33,14 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddModels(this IServiceCollection serviceCollection)
     {
         return serviceCollection.AddTransient<CreateMedicationTimeModel>()
-                                .AddTransient<EditExistingMedicationTimeModel>();
+                                .AddTransient<EditExistingMedicationTimeModel>()
+                                .AddTransient<UsersMedicationSchedulesListModel>();
     }
 
     public static IServiceCollection AddApplicationLayerServices(this IServiceCollection serviceCollection)
     {
-        return serviceCollection.AddSingleton<MedicationTimeService>();
+        return serviceCollection.AddSingleton<MedicationTimeService>()
+                                .AddSingleton<MedicationScheduleService>();
     }
 
     public static IServiceCollection AddDataRepositories(this IServiceCollection serviceCollection)
