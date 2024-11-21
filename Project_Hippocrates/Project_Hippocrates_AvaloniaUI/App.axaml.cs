@@ -49,7 +49,7 @@ namespace Project_Hippocrates_AvaloniaUI
                 };
             }
             var viewShower = Services.GetService<IViewShower>();
-            viewShower?.ShowViewAsync(typeof(CreateMedicationTimeViewModel), new Bundle());
+            viewShower?.ShowViewAsync(typeof(UsersMedicationSchedulesListViewModel), new Bundle());
             base.OnFrameworkInitializationCompleted();
         }
     }

@@ -42,7 +42,7 @@ public class DesktopViewShower : IViewShower
     public async Task ShowPreviousViewAsync()
     {
         if(_viewModelTypeHistory.Count <= 1) //No previous views in history
-            return;
+            throw new Exception("No previous views in history");
 
         _ = _viewModelTypeHistory.Pop();
         (Type, Bundle?) previousView = _viewModelTypeHistory.Peek();
