@@ -3,11 +3,30 @@
         xmlns:gbCtrl="using:GroupBox.Avalonia.Controls"
         xmlns:models="using:Project_Hippocrates_AvaloniaUI.Models">
     
+    <Styles.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceInclude Source="avares://Project_Hippocrates_AvaloniaUI/Assets/Colors.axaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Styles.Resources>
+    
     <Design.PreviewWith>
         <Border Padding="20">
             <!-- Add Controls for Previewer Here -->
         </Border>
     </Design.PreviewWith>
+    
+    <Style Selector="Button.BackToPreviousViewButton">
+        <Setter Property="Content" Value="&lt;"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Width" Value="40"/>
+    </Style>
     
     <Style Selector="TextBlock.ViewHeader">
         <Setter Property="Margin" Value="0 10 0 0"/>

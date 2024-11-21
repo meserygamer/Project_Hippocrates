@@ -51,7 +51,12 @@
     <Border Padding="20">
         
         <Grid RowDefinitions="auto, auto, *, auto">
-        
+            
+            <!--Back button-->
+            <Button Grid.Row="0"
+                    Classes="BackToPreviousViewButton"
+                    Command="{Binding OnBackButtonClick}"/>
+            
             <!--View Header-->
             <TextBlock Grid.Row="0"
                        Classes="ViewHeader"
