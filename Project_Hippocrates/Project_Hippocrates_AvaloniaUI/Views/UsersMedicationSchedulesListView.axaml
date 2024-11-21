@@ -10,7 +10,7 @@
              x:DataType="vm:UsersMedicationSchedulesListViewModel">
 
   <UserControl.Styles>
-    <StyleInclude Source="/Styles/MainViewStyles.axaml"/>
+    <StyleInclude Source="/Styles/UsersMedicationSchedulesListViewStyles.axaml"/>
   </UserControl.Styles>
   
   <Design.DataContext>
