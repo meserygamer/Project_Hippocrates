@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using MapsterMapper;
 using Project_Hippocrates_AvaloniaUI.Models.DTOs;
 using Project_Hippocrates_AvaloniaUI.ViewModels;
@@ -20,9 +21,10 @@ public class CreateMedicationTimeModel : ModelBase<CreateMedicationTimeViewModel
         _medicationTimeService = medicationTimeService;
     }
 
-    public async Task<bool> TryCreateMedicationTimeModel(MedicationTimeDTO dto)
+    public async Task<bool> TryCreateMedicationTimeForSchedule(Guid scheduleId,
+        MedicationTimeDTO dto)
     {
         MedicationTime medicationTime = _mapper.Map<MedicationTime>(dto);
-        return await _medicationTimeService.CreateMedicationTimeAsync(medicationTime);
+        return await _medicationTimeService.CreateMedicationTimeAndJoinToSchedule(scheduleId, medicationTime);
     }
 }

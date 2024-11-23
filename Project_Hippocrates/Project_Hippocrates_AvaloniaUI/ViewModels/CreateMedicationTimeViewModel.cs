@@ -6,9 +6,17 @@ namespace Project_Hippocrates_AvaloniaUI.ViewModels;
 
 public class CreateMedicationTimeViewModel : EditMedicationTimeViewModelBase
 {
-    private CreateMedicationTimeModel _model;
-    private INativeNotificator _nativeNotificator;
-    
+    #region Fields
+
+    private readonly CreateMedicationTimeModel _model;
+    private readonly INativeNotificator _nativeNotificator;
+
+    private Guid _currentMedicationScheduleId;
+
+    #endregion
+
+    #region Constructors
+
     public CreateMedicationTimeViewModel(CreateMedicationTimeModel model,
         INativeNotificator nativeNotificator,
         IViewShower viewShower) 
@@ -24,17 +32,34 @@ public class CreateMedicationTimeViewModel : EditMedicationTimeViewModelBase
     /// </summary>
     public CreateMedicationTimeViewModel() : base(new (), null!) { }
 
+    #endregion
+
+    #region Implementation ViewModelBase
+
+    public override Task InitializeForShowAsync(Bundle? bundle)
+    {
+        if (bundle is null)
+            throw new ArgumentNullException(nameof(bundle), $"{nameof(CreateMedicationTimeViewModel)} requires external data to initialize!");
+        _currentMedicationScheduleId = bundle.GetData<Guid>("CurrentMedicationSchedule");
+        return Task.CompletedTask;
+    }
+
     public override string ViewLabel => "Создание";
+
+    #endregion
+
+    #region Implementation EditMedicationTimeViewModelBase
 
     public override async Task OnSubmitAsync()
     {
         try
         {
-            if (!await _model.TryCreateMedicationTimeModel(base.DisplayedMedicationTime))
+            if (!await _model.TryCreateMedicationTimeForSchedule(_currentMedicationScheduleId,
+                    base.DisplayedMedicationTime))
             {
-                await _nativeNotificator.SendMessageAsync("Время приёма лекарств успешно создано");
+                await _nativeNotificator.SendMessageAsync("Время приёма лекарств успешно создано!");
             }
-            await _nativeNotificator.SendMessageAsync("Создание не удалось");
+            await _nativeNotificator.SendMessageAsync("Создание не удалось!");
         }
         catch (Exception e)
         {
@@ -42,4 +67,6 @@ public class CreateMedicationTimeViewModel : EditMedicationTimeViewModelBase
             await _nativeNotificator.SendMessageAsync("Что-то пошло не так!");
         }
     }
+
+    #endregion
 }

@@ -84,8 +84,16 @@
         <!--Body panel-->
         <Border Grid.Row="1"
                 Classes="BodyPanel">
-          <ItemsRepeater Classes="MedicationTimeRepeater"
-                         ItemsSource="{Binding MedicationTimes, Mode=OneWay}"/>
+          <ScrollViewer>
+            <StackPanel Orientation="Vertical">
+              <ItemsControl Classes="MedicationTimesControl"
+                            ItemsSource="{Binding MedicationTimes, Mode=OneWay}"/>
+              <Button HorizontalAlignment="Stretch"
+                      Margin="0 20 0 0"
+                      Height="50"
+                      Command="{Binding OnAddMedicationTimeButtonClickAsync}"/>
+            </StackPanel>
+          </ScrollViewer>
         </Border>
 
       </Grid>

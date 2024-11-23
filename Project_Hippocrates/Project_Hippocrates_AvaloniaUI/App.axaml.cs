@@ -43,9 +43,9 @@ namespace Project_Hippocrates_AvaloniaUI
             }
             else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
             {
-                singleViewPlatform.MainView = new EditMedicationTimeView()
+                singleViewPlatform.MainView = new UsersMedicationSchedulesListView()
                 {
-                    DataContext = Services.GetService<CreateMedicationTimeViewModel>()
+                    DataContext = Services.GetService<UsersMedicationSchedulesListViewModel>()
                 };
             }
             var viewShower = Services.GetService<IViewShower>();

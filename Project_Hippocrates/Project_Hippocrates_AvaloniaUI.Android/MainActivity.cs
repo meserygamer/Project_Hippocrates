@@ -40,6 +40,7 @@ namespace Project_Hippocrates_AvaloniaUI.Android
                                     .AddViewLocator()
                                     .AddSingleton<Context>(this.ApplicationContext!)
                                     .AddTestRepositories()
+                                    .AddSingleton<IViewShower, AndroidViewShower>()
                                     .AddSingleton<INativeNotificator, AndroidNotificator>();
         }
     }

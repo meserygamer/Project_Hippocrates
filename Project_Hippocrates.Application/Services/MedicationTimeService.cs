@@ -1,26 +1,42 @@
-﻿using Project_Hippocrates.Core;
+﻿using System.Diagnostics;
+using Project_Hippocrates.Core;
 using Project_Hippocrates.Core.Entities;
 
 namespace Project_Hippocrates.Application.Services;
 
 public class MedicationTimeService
 {
-    private IDomainEntityRepository<MedicationTime> _repository;
+    private IDomainEntityRepository<MedicationTime> _medicationTimeRepository;
+    private IDomainEntityRepository<MedicationSchedule> _medicationScheduleRepository;
 
-    public MedicationTimeService(IDomainEntityRepository<MedicationTime> repository)
+    public MedicationTimeService(IDomainEntityRepository<MedicationTime> medicationTimeRepository, IDomainEntityRepository<MedicationSchedule> medicationScheduleRepository)
     {
-        _repository = repository;
+        _medicationTimeRepository = medicationTimeRepository;
+        _medicationScheduleRepository = medicationScheduleRepository;
     }
 
-    public bool CreateMedicationTime(MedicationTime medicationTime)
-        => _repository.Add(medicationTime);
-    public bool ChangeEntityById(Guid guid, MedicationTime medicationTime)
-        => _repository.ChangeEntityById(guid, medicationTime);
-    
+    public async Task<bool> CreateMedicationTimeAndJoinToSchedule(Guid scheduleId, MedicationTime medicationTime)
+    {
+        try
+        {
+            MedicationSchedule schedule = await _medicationScheduleRepository.GetByIdAsync(scheduleId) 
+                                          ?? throw new ApplicationException("Schedule was not exist!");
+            if (!await _medicationTimeRepository.AddAsync(medicationTime))
+                throw new ApplicationException("MedicationTime creation was failed");
+            IEnumerable<MedicationTime> medicationTimes = schedule.MedicationTimes.Union(new []{medicationTime});
+            schedule.MedicationTimes = medicationTimes;
+            return await _medicationScheduleRepository.ChangeEntityByIdAsync(scheduleId, schedule);
+        }
+        catch (Exception e)
+        {
+            Trace.WriteLine(e.Message);
+        }
+        return false;
+    }
     public async Task<bool> CreateMedicationTimeAsync(MedicationTime medicationTime)
-        => await _repository.AddAsync(medicationTime);
+        => await _medicationTimeRepository.AddAsync(medicationTime);
     public async Task<bool> ChangeEntityByIdAsync(Guid guid, MedicationTime medicationTime)
-        => await _repository.ChangeEntityByIdAsync(guid, medicationTime);
+        => await _medicationTimeRepository.ChangeEntityByIdAsync(guid, medicationTime);
     public async Task<MedicationTime?> FindMedicationTimeByIdAsync(Guid id)
-        => await _repository.GetByIdAsync(id);
+        => await _medicationTimeRepository.GetByIdAsync(id);
 }

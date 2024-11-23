@@ -12,13 +12,13 @@ public class MedicationTimeMappingConfig : IRegister
     public void Register(TypeAdapterConfig config)
     {
         config.NewConfig<MedicationTimeDTO, MedicationTime>()
-            .Map(dest => dest.Id, src => src.DrugId)
+            .Map(dest => dest.Id, src => src.Id)
             .Map(dest => dest.Label, src => src.Label)
             .Map(dest => dest.Time, src => src.Time)
             .Map(dest => dest.MedicationsTaken, src => src.MedicationsTaken);
         
         config.NewConfig<MedicationTime, MedicationTimeDTO>()
-            .Map(dest => dest.DrugId, src => src.Id)
+            .Map(dest => dest.Id, src => src.Id)
             .Map(dest => dest.Label, src => src.Label)
             .Map(dest => dest.Time, src => src.Time)
             .Map(dest => dest.MedicationsTaken, src => ConvertMedicationTaken(src.MedicationsTaken, config));

@@ -17,21 +17,49 @@
           
           <converters:DrugDosageConverter x:Key="DrugDosageConverter"/>
           
-          <DataTemplate x:Key="MedicationTimeRepeaterItemTemplate"
+          <DataTemplate x:Key="MedicationTimesControlItemTemplate"
                         DataType="{x:Type dtos:MedicationTimeDTO}">
-            <gbCtrl:GroupBox Theme="{StaticResource GroupBoxClassic}">
+            <Grid>
+              
+              <gbCtrl:GroupBox Theme="{StaticResource GroupBoxClassic}">
 
-              <gbCtrl:GroupBox.Header>
-                <MultiBinding StringFormat="{}{0} ({1})">
-                  <Binding Path="Label"/>
-                  <Binding Path="Time"/>
-                </MultiBinding>
-              </gbCtrl:GroupBox.Header>
+                <gbCtrl:GroupBox.Header>
+                  <MultiBinding StringFormat="{}{0} ({1})">
+                    <Binding Path="Label"/>
+                    <Binding Path="Time"/>
+                  </MultiBinding>
+                </gbCtrl:GroupBox.Header>
 
-              <ItemsRepeater Classes="DrugDosageRepeater"
-                             ItemsSource="{Binding MedicationsTaken}"/>
+                <ItemsRepeater Classes="DrugDosageRepeater"
+                               ItemsSource="{Binding MedicationsTaken}"/>
 
-            </gbCtrl:GroupBox>
+              </gbCtrl:GroupBox>
+              
+              <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top"
+                          Orientation="Horizontal">
+                <Button Height="20" Width="20"
+                        Background="{StaticResource SecondaryBrush}"
+                        Foreground="White"
+                        Padding="0"
+                        Content="☰"
+                        FontSize="10"
+                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                        Command="{Binding $parent[UserControl].DataContext.OnEditMedicationTimeButtonClickAsync}"
+                        CommandParameter="{Binding .}"
+                        Margin="0 0 10 0"/>
+                <Button Height="20" Width="20"
+                        Background="{StaticResource AccentBrush}"
+                        Foreground="White"
+                        Padding="0"
+                        Content="x"
+                        FontSize="10"
+                        HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+                        Command="{Binding $parent[UserControl].DataContext.OnRemoveMedicationTimeButtonClickAsync}"
+                        CommandParameter="{Binding .}"
+                        Margin="0 0 10 0"/>
+              </StackPanel>
+              
+            </Grid>
           </DataTemplate>
           
           <DataTemplate x:Key="DrugDosageRepeaterItemTemplate"
@@ -156,11 +184,19 @@
     <Setter Property="Margin" Value="0 20 0 0"/>
   </Style>
 
-  <Style Selector="ItemsRepeater.MedicationTimeRepeater">
-    <Setter Property="ItemTemplate" Value="{StaticResource MedicationTimeRepeaterItemTemplate}"/>
+  <Style Selector="ItemsControl.MedicationTimesControl">
+    <Setter Property="ItemTemplate" Value="{StaticResource MedicationTimesControlItemTemplate}"/>
+    <Setter Property="ItemsPanel">
+      <Setter.Value>
+        <ItemsPanelTemplate>
+          <StackPanel Orientation="Vertical" Spacing="15"/>
+        </ItemsPanelTemplate>
+      </Setter.Value>
+    </Setter>
   </Style>
 
   <Style Selector="ItemsRepeater.DrugDosageRepeater">
+    <Setter Property="Margin" Value="5"/>
     <Setter Property="ItemTemplate" Value="{StaticResource DrugDosageRepeaterItemTemplate}"/>
   </Style>
 
