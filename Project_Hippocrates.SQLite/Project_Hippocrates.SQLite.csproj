@@ -10,4 +10,9 @@
       <ProjectReference Include="..\Project_Hippocrates.Core\Project_Hippocrates.Core.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.11" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.11" />
+    </ItemGroup>
+
 </Project>

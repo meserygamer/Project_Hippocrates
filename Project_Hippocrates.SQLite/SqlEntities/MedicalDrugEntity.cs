@@ -11,4 +11,10 @@ public class MedicalDrugEntity
     /// Drug name
     /// </summary>
     public string Name { get; set; } = null!;
+
+    #region Navigation properties
+
+    public DrugDosageEntity? DrugDosage { get; set; }
+
+    #endregion
 }

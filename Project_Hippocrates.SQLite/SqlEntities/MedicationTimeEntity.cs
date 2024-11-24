@@ -7,6 +7,8 @@ public class MedicationTimeEntity
     /// </summary>
     public Guid Id { get; set; }
 
+    public Guid MedicationScheduleId { get; set; }
+
     /// <summary>
     /// Medication time label
     /// </summary>
@@ -18,6 +20,8 @@ public class MedicationTimeEntity
     public TimeSpan Time { get; set; } = TimeSpan.Zero;
 
     #region Navigation properties
+
+    public MedicationScheduleEntity MedicationSchedule { get; set; }
 
     /// <summary>
     /// Medications taken at this time
