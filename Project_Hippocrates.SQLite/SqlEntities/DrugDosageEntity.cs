@@ -10,7 +10,7 @@ public class DrugDosageEntity
     /// Drug that's taking id
     /// </summary>
     public Guid DrugId { get; set; }
-    public Guid MedicationTimeId { get; set; }
+    public Guid? MedicationTimeId { get; set; }
     /// <summary>
     /// Drug dosage value
     /// </summary>
@@ -27,7 +27,7 @@ public class DrugDosageEntity
     /// </summary>
     public MedicalDrugEntity Drug { get; set; } = null!;
 
-    public MedicationTimeEntity MedicationTime { get; set; } = null!;
+    public MedicationTimeEntity? MedicationTime { get; set; } = null!;
 
     #endregion
 }

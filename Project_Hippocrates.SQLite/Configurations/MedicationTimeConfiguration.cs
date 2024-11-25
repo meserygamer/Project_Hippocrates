@@ -22,7 +22,7 @@ public class MedicationTimeConfiguration : IEntityTypeConfiguration<MedicationTi
             .IsRequired();
 
         builder.Property(ms => ms.MedicationScheduleId)
-            .IsRequired();
+            .IsRequired(false);
 
         builder.HasMany(ms => ms.MedicationsTaken)
             .WithOne(mt => mt.MedicationTime)

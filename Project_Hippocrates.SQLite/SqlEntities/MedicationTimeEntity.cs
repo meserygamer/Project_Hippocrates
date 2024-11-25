@@ -7,7 +7,7 @@ public class MedicationTimeEntity
     /// </summary>
     public Guid Id { get; set; }
 
-    public Guid MedicationScheduleId { get; set; }
+    public Guid? MedicationScheduleId { get; set; }
 
     /// <summary>
     /// Medication time label
@@ -21,7 +21,7 @@ public class MedicationTimeEntity
 
     #region Navigation properties
 
-    public MedicationScheduleEntity MedicationSchedule { get; set; }
+    public MedicationScheduleEntity? MedicationSchedule { get; set; }
 
     /// <summary>
     /// Medications taken at this time

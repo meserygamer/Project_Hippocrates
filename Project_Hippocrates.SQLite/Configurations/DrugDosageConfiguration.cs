@@ -18,7 +18,7 @@ public class DrugDosageConfiguration : IEntityTypeConfiguration<DrugDosageEntity
             .IsRequired();
 
         builder.Property(d => d.MedicationTimeId)
-            .IsRequired();
+            .IsRequired(false);
         
         builder.Property(d => d.Value)
             .IsRequired();
