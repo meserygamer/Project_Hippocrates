@@ -21,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Project_Hippocrates.SQLite\Project_Hippocrates.SQLite.csproj" />
     <ProjectReference Include="..\Project_Hippocrates_AvaloniaUI\Project_Hippocrates_AvaloniaUI.csproj" />
   </ItemGroup>
 </Project>
