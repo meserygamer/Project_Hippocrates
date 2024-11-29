@@ -6,7 +6,7 @@ public class DesktopSqLiteDbConnectionStringProvider : ISqLiteDbConnectionString
 {
     public DesktopSqLiteDbConnectionStringProvider(string dbFileName)
     {
-        ConnectionString = dbFileName;
+        ConnectionString = string.Concat("Data Source=", dbFileName);
     }
 
     public string ConnectionString { get; }

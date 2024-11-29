@@ -17,7 +17,7 @@ public class AndroidSqLiteDbConnectionStringProvider : ISqLiteDbConnectionString
         get
         {
             string personalFolderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
-            return Path.Combine(personalFolderPath, _dbFileName);
+            return string.Concat("Data Source=", Path.Combine(personalFolderPath, _dbFileName));
         }
     }
 }
