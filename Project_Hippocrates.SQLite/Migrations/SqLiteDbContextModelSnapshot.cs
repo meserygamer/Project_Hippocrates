@@ -26,7 +26,7 @@ namespace Project_Hippocrates.SQLite.Migrations
                     b.Property<Guid>("DrugId")
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("MedicationTimeId")
+                    b.Property<Guid?>("MedicationTimeId")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Unit")
@@ -90,7 +90,7 @@ namespace Project_Hippocrates.SQLite.Migrations
                         .HasMaxLength(255)
                         .HasColumnType("TEXT");
 
-                    b.Property<Guid>("MedicationScheduleId")
+                    b.Property<Guid?>("MedicationScheduleId")
                         .HasColumnType("TEXT");
 
                     b.Property<TimeSpan>("Time")
