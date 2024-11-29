@@ -32,6 +32,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Project_Hippocrates.Application\Project_Hippocrates.Application.csproj" />
     <ProjectReference Include="..\..\Project_Hippocrates.Core\Project_Hippocrates.Core.csproj" />
+    <ProjectReference Include="..\..\Project_Hippocrates.SQLite\Project_Hippocrates.SQLite.csproj" />
     <ProjectReference Include="..\..\Project_Hippocrates.TestEntityRepositories\Project_Hippocrates.TestEntityRepositories.csproj" />
   </ItemGroup>
 </Project>
