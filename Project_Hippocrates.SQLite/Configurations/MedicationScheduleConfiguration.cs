@@ -17,10 +17,19 @@ public class MedicationScheduleConfiguration : IEntityTypeConfiguration<Medicati
         builder.Property(ms => ms.Name)
             .IsRequired()
             .HasMaxLength(255);
-
+        
         builder.HasMany(ms => ms.MedicationTimes)
             .WithOne(mt => mt.MedicationSchedule)
             .HasForeignKey(mt => mt.MedicationScheduleId)
             .IsRequired(true);
+
+        builder.HasData(
+            new MedicationScheduleEntity
+            {
+                Id = Guid.NewGuid(),
+                MedicationTimes = [],
+                Name = "Главное расписание"
+            }
+            );
     }
 }
