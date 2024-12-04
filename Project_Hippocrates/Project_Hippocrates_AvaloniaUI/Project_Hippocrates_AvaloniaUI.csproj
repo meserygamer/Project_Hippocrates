@@ -27,6 +27,7 @@
     <PackageReference Include="Mapster" Version="7.4.0" />
     <PackageReference Include="Mapster.DependencyInjection" Version="1.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Plugin.LocalNotification" Version="11.1.4" />
   </ItemGroup>
 
   <ItemGroup>
