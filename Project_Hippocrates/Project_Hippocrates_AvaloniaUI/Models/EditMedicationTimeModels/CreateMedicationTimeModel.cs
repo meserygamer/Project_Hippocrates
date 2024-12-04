@@ -25,6 +25,6 @@ public class CreateMedicationTimeModel : ModelBase<CreateMedicationTimeViewModel
         MedicationTimeDTO dto)
     {
         MedicationTime medicationTime = _mapper.Map<MedicationTime>(dto);
-        return await _medicationTimeService.CreateMedicationTimeAndJoinToSchedule(scheduleId, medicationTime);
+        return await _medicationTimeService.CreateMedicationTimeAndJoinToScheduleAsync(scheduleId, medicationTime);
     }
 }

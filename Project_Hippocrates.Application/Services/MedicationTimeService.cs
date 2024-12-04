@@ -15,7 +15,7 @@ public class MedicationTimeService
         _medicationScheduleRepository = medicationScheduleRepository;
     }
 
-    public async Task<bool> CreateMedicationTimeAndJoinToSchedule(Guid scheduleId, MedicationTime medicationTime)
+    public async Task<bool> CreateMedicationTimeAndJoinToScheduleAsync(Guid scheduleId, MedicationTime medicationTime)
     {
         try
         {
@@ -39,4 +39,6 @@ public class MedicationTimeService
         => await _medicationTimeRepository.ChangeEntityByIdAsync(guid, medicationTime);
     public async Task<MedicationTime?> FindMedicationTimeByIdAsync(Guid id)
         => await _medicationTimeRepository.GetByIdAsync(id);
+    public async Task<IEnumerable<int>> GetAllBusyNotificationIdAsync()
+        => (await _medicationTimeRepository.GetAllAsync()).Select((mt, id) => mt.NotificationId);
 }
