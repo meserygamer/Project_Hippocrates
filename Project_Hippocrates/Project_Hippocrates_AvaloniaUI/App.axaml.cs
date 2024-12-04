@@ -6,6 +6,7 @@ using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
 using Project_Hippocrates_AvaloniaUI.ViewModels;
 using Project_Hippocrates_AvaloniaUI.Views;
+using Project_Hippocrates.SQLite;
 
 namespace Project_Hippocrates_AvaloniaUI
 {

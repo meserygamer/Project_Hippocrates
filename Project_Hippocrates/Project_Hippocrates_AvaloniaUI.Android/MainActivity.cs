@@ -5,6 +5,7 @@ using Avalonia;
 using Avalonia.Android;
 using Microsoft.Extensions.DependencyInjection;
 using Project_Hippocrates_AvaloniaUI.Extensions;
+using Project_Hippocrates.SQLite;
 
 namespace Project_Hippocrates_AvaloniaUI.Android
 {
@@ -32,16 +33,17 @@ namespace Project_Hippocrates_AvaloniaUI.Android
         private IServiceCollection InitializeAndroidServiceCollection(IServiceCollection serviceCollection)
         {
             return serviceCollection.AddViews()
-                                    .AddViewModels()
-                                    .AddModels()
-                                    .AddApplicationLayerServices()
-                                    .AddDataRepositories()
-                                    .AddMapper()
-                                    .AddViewLocator()
-                                    .AddSingleton<Context>(this.ApplicationContext!)
-                                    .AddTestRepositories()
-                                    .AddSingleton<IViewShower, AndroidViewShower>()
-                                    .AddSingleton<INativeNotificator, AndroidNotificator>();
+                .AddViewModels()
+                .AddModels()
+                .AddApplicationLayerServices()
+                .AddSqLite()
+                .AddMapper()
+                .AddViewLocator()
+                .AddSingleton<Context>(this.ApplicationContext!)
+                .AddSingleton<IViewShower, AndroidViewShower>()
+                .AddSingleton<INativeNotificator, AndroidNotificator>()
+                .AddTransient<ISqLiteDbConnectionStringProvider, AndroidSqLiteDbConnectionStringProvider>(provider =>
+                    new AndroidSqLiteDbConnectionStringProvider("appDb.db"));
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Mapster;
 using MapsterMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Project_Hippocrates_AvaloniaUI.Models;
 using Project_Hippocrates_AvaloniaUI.Models.EditMedicationTimeModels;
@@ -9,7 +10,7 @@ using Project_Hippocrates_AvaloniaUI.Views;
 using Project_Hippocrates.Application.Services;
 using Project_Hippocrates.Core;
 using Project_Hippocrates.Core.Entities;
-using Project_Hippocrates.TestEntityRepositories.Repositories;
+using Project_Hippocrates.SQLite;
 
 namespace Project_Hippocrates_AvaloniaUI.Extensions;
 
@@ -43,11 +44,6 @@ public static class ServiceCollectionExtensions
                                 .AddSingleton<MedicationScheduleService>();
     }
 
-    public static IServiceCollection AddDataRepositories(this IServiceCollection serviceCollection)
-    {
-        return serviceCollection.AddSingleton<IDomainEntityRepository<MedicationTime>>(provider => null); //TODO Add repository as soon ready
-    }
-
     public static IServiceCollection AddViewLocator(this IServiceCollection serviceCollection)
     {
         return serviceCollection.AddSingleton<ViewLocator>();
@@ -64,9 +60,26 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddTestRepositories(this IServiceCollection serviceCollection)
     {
-        return serviceCollection.AddTransient<IDomainEntityRepository<DrugDosage>, DrugDosageRepository>()
-                                .AddTransient<IDomainEntityRepository<MedicalDrug>, MedicalDrugRepository>()
-                                .AddTransient<IDomainEntityRepository<MedicationSchedule>, MedicationScheduleRepository>()
-                                .AddTransient<IDomainEntityRepository<MedicationTime>, MedicationTimeRepository>();
+        return serviceCollection.AddTransient<IDomainEntityRepository<DrugDosage>, 
+                Project_Hippocrates.TestEntityRepositories.Repositories.DrugDosageRepository>()
+            .AddTransient<IDomainEntityRepository<MedicalDrug>, 
+                Project_Hippocrates.TestEntityRepositories.Repositories.MedicalDrugRepository>()
+            .AddTransient<IDomainEntityRepository<MedicationSchedule>, 
+                Project_Hippocrates.TestEntityRepositories.Repositories.MedicationScheduleRepository>()
+            .AddTransient<IDomainEntityRepository<MedicationTime>, 
+                Project_Hippocrates.TestEntityRepositories.Repositories.MedicationTimeRepository>();
+    }
+
+    public static IServiceCollection AddSqLite(this IServiceCollection serviceCollection)
+    {
+        return serviceCollection.AddTransient<IDomainEntityRepository<DrugDosage>,
+                Project_Hippocrates.SQLite.Repositories.DrugDosageRepository>()
+            .AddTransient<IDomainEntityRepository<MedicalDrug>, 
+                Project_Hippocrates.SQLite.Repositories.MedicalDrugRepository>()
+            .AddTransient<IDomainEntityRepository<MedicationSchedule>, 
+                Project_Hippocrates.SQLite.Repositories.MedicationScheduleRepository>()
+            .AddTransient<IDomainEntityRepository<MedicationTime>, 
+                Project_Hippocrates.SQLite.Repositories.MedicationTimeRepository>()
+            .AddTransient<SqLiteDbContext, SqLiteDbContext>();
     }
 }

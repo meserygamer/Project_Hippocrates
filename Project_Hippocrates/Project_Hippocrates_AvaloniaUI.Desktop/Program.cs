@@ -2,6 +2,7 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 using Project_Hippocrates_AvaloniaUI.Extensions;
+using Project_Hippocrates.SQLite;
 
 namespace Project_Hippocrates_AvaloniaUI.Desktop
 {
@@ -27,12 +28,12 @@ namespace Project_Hippocrates_AvaloniaUI.Desktop
                                     .AddViewModels()
                                     .AddModels()
                                     .AddApplicationLayerServices()
-                                    .AddDataRepositories()
+                                    .AddSqLite()
                                     .AddViewLocator()
-                                    .AddTestRepositories()
                                     .AddMapper()
                                     .AddSingleton<IViewShower, DesktopViewShower>()
-                                    .AddSingleton<INativeNotificator, DesktopNotificator>();
+                                    .AddSingleton<INativeNotificator, DesktopNotificator>()
+                                    .AddTransient<ISqLiteDbConnectionStringProvider, DesktopSqLiteDbConnectionStringProvider>(provider => new DesktopSqLiteDbConnectionStringProvider("appDb.db"));
         }
     }
 }

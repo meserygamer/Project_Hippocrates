@@ -27,11 +27,13 @@
     <PackageReference Include="Mapster" Version="7.4.0" />
     <PackageReference Include="Mapster.DependencyInjection" Version="1.0.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="Plugin.LocalNotification" Version="11.1.4" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Project_Hippocrates.Application\Project_Hippocrates.Application.csproj" />
     <ProjectReference Include="..\..\Project_Hippocrates.Core\Project_Hippocrates.Core.csproj" />
+    <ProjectReference Include="..\..\Project_Hippocrates.SQLite\Project_Hippocrates.SQLite.csproj" />
     <ProjectReference Include="..\..\Project_Hippocrates.TestEntityRepositories\Project_Hippocrates.TestEntityRepositories.csproj" />
   </ItemGroup>
 </Project>

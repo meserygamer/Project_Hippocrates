@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using Project_Hippocrates_AvaloniaUI.Models;
 using Project_Hippocrates_AvaloniaUI.Models.DTOs;
@@ -42,7 +41,7 @@ namespace Project_Hippocrates_AvaloniaUI.ViewModels
         public override async Task InitializeForShowAsync(Bundle? bundle)
         {
             MedicationSchedules = await _model.GetAllMedicationScheduleAsync();
-            SelectedMedicationSchedule = MedicationSchedules[0];
+            SelectedMedicationSchedule = MedicationSchedules.Count >= 1 ? MedicationSchedules[0] : null;
         }
 
         #endregion
