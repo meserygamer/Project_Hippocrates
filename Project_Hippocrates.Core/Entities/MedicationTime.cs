@@ -21,4 +21,9 @@ public class MedicationTime
     /// Medications taken at this time
     /// </summary>
     public IEnumerable<DrugDosage> MedicationsTaken { get; set; } = null!;
+
+    /// <summary>
+    /// NotificationId
+    /// </summary>
+    public int NotificationId { get; set; }
 }

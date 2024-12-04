@@ -24,6 +24,9 @@ public class MedicationTimeConfiguration : IEntityTypeConfiguration<MedicationTi
         builder.Property(ms => ms.MedicationScheduleId)
             .IsRequired(false);
 
+        builder.Property(ms => ms.PushNotificationId)
+            .IsRequired(true);
+
         builder.HasMany(ms => ms.MedicationsTaken)
             .WithOne(mt => mt.MedicationTime)
             .HasForeignKey(mt => mt.MedicationTimeId)

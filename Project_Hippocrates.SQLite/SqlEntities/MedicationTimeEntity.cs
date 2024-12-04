@@ -19,6 +19,11 @@ public class MedicationTimeEntity
     /// </summary>
     public TimeSpan Time { get; set; } = TimeSpan.Zero;
 
+    /// <summary>
+    /// Push id
+    /// </summary>
+    public int PushNotificationId { get; set; }
+
     #region Navigation properties
 
     public MedicationScheduleEntity? MedicationSchedule { get; set; }

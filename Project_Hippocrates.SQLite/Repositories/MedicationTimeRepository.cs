@@ -107,6 +107,7 @@ public class MedicationTimeRepository : IDomainEntityRepository<MedicationTime>
         dest.Id = source.Id;
         dest.Label = source.Label;
         dest.Time = source.Time;
+        dest.PushNotificationId = source.NotificationId;
         dest.MedicationsTaken = source.MedicationsTaken
             .AsQueryable()
             .ProjectToType<DrugDosageEntity>(_mapper.Config)
