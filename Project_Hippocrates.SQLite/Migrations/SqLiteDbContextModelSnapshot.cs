@@ -100,6 +100,9 @@ namespace Project_Hippocrates.SQLite.Migrations
                     b.Property<Guid?>("MedicationScheduleId")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("PushNotificationId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<TimeSpan>("Time")
                         .HasColumnType("TEXT");
 

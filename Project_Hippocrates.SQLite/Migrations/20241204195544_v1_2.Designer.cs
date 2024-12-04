@@ -11,7 +11,7 @@ using Project_Hippocrates.SQLite;
 namespace Project_Hippocrates.SQLite.Migrations
 {
     [DbContext(typeof(SqLiteDbContext))]
-    [Migration("20241202205756_v1_2")]
+    [Migration("20241204195544_v1_2")]
     partial class v1_2
     {
         /// <inheritdoc />
@@ -102,6 +102,9 @@ namespace Project_Hippocrates.SQLite.Migrations
 
                     b.Property<Guid?>("MedicationScheduleId")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("PushNotificationId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<TimeSpan>("Time")
                         .HasColumnType("TEXT");

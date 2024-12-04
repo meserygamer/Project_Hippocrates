@@ -26,7 +26,7 @@ public class MedicationScheduleConfiguration : IEntityTypeConfiguration<Medicati
         builder.HasData(
             new MedicationScheduleEntity
             {
-                Id = Guid.NewGuid(),
+                Id = new Guid("f5fd4ea2-9bd4-456f-b704-af8f4c9b82e6"),
                 MedicationTimes = [],
                 Name = "Главное расписание"
             }
