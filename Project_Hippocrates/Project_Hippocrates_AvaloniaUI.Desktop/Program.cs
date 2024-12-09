@@ -33,6 +33,7 @@ namespace Project_Hippocrates_AvaloniaUI.Desktop
                                     .AddMapper()
                                     .AddSingleton<IViewShower, DesktopViewShower>()
                                     .AddSingleton<INativeNotificator, DesktopNotificator>()
+                                    .AddSingleton<LocalPushNotificator>()
                                     .AddTransient<ISqLiteDbConnectionStringProvider, DesktopSqLiteDbConnectionStringProvider>(provider => new DesktopSqLiteDbConnectionStringProvider("appDb.db"));
         }
     }

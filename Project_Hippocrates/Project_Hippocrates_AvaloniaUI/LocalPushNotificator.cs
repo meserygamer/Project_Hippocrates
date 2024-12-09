@@ -44,6 +44,26 @@ public class LocalPushNotificator
         return notificationRequest.NotificationId;
     }
 
+    public async Task<int> ShowPushNotificationByTimeSpan(string description, string title, TimeSpan time)
+    {
+        var notificationRequest = new NotificationRequest()
+        {
+            BadgeNumber = 1,
+            CategoryType = NotificationCategoryType.Alarm,
+            Description = description,
+            Title = title,
+            NotificationId = await GenerateNotificationIdAsync(),
+            Schedule = new NotificationRequestSchedule()
+            {
+                NotifyTime = DateTime.Now + time,
+                RepeatType = NotificationRepeat.No
+            }
+        };
+        var req = notificationRequest.Show();
+        _busyNotificationIds!.Add(notificationRequest.NotificationId);
+        return notificationRequest.NotificationId;
+    }
+
     public bool CancelNotificationById(int notificationId) 
         => LocalNotificationCenter.Current.Cancel(notificationId);
     
