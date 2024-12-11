@@ -80,6 +80,10 @@ public class CreateMedicationTimeViewModel : EditMedicationTimeViewModelBase
     #endregion
 
     private async Task SetPushForMedicationTime(MedicationTimeDTO medicationTimeDto)
-    {
-    }
+        => await _localPushNotificator.AddPushNotificationInScheduleAsync(
+            new PushSettings("Пора пить таблетки!",
+                medicationTimeDto.MedicationTakenList,
+                DateTime.Today + medicationTimeDto.Time,
+                null)
+            );
 }
