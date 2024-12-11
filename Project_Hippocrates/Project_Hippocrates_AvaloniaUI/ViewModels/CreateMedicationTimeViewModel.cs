@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Project_Hippocrates_AvaloniaUI.Models.DTOs;
 using Project_Hippocrates_AvaloniaUI.Models.EditMedicationTimeModels;
+using Project_Hippocrates_AvaloniaUI.Services;
+using Project_Hippocrates_AvaloniaUI.Services.LocalPushNotificator;
 
 namespace Project_Hippocrates_AvaloniaUI.ViewModels;
 
@@ -10,6 +13,7 @@ public class CreateMedicationTimeViewModel : EditMedicationTimeViewModelBase
 
     private readonly CreateMedicationTimeModel _model;
     private readonly INativeNotificator _nativeNotificator;
+    private readonly LocalPushNotificator _localPushNotificator;
 
     private Guid _currentMedicationScheduleId;
 
@@ -19,18 +23,23 @@ public class CreateMedicationTimeViewModel : EditMedicationTimeViewModelBase
 
     public CreateMedicationTimeViewModel(CreateMedicationTimeModel model,
         INativeNotificator nativeNotificator,
-        IViewShower viewShower) 
+        IViewShower viewShower,
+        LocalPushNotificator localPushNotificator) 
         : base(new (), viewShower) 
     {
         _model = model;
         _model.ViewModel = this;
         _nativeNotificator = nativeNotificator;
+        _localPushNotificator = localPushNotificator;
     }
 
     /// <summary>
     /// Only for design mode
     /// </summary>
-    public CreateMedicationTimeViewModel() : base(new (), null!) { }
+    public CreateMedicationTimeViewModel(LocalPushNotificator localPushNotificator) : base(new (), null!)
+    {
+        _localPushNotificator = localPushNotificator;
+    }
 
     #endregion
 

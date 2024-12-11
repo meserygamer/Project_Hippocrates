@@ -6,6 +6,8 @@ using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
 using Plugin.LocalNotification;
+using Project_Hippocrates_AvaloniaUI.Services;
+using Project_Hippocrates_AvaloniaUI.Services.LocalPushNotificator;
 using Project_Hippocrates_AvaloniaUI.ViewModels;
 using Project_Hippocrates_AvaloniaUI.Views;
 using Project_Hippocrates.SQLite;

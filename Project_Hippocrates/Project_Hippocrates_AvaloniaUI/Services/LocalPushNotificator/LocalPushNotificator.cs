@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Plugin.LocalNotification;
 using Project_Hippocrates.Application.Services;
 
-namespace Project_Hippocrates_AvaloniaUI;
+namespace Project_Hippocrates_AvaloniaUI.Services.LocalPushNotificator;
 
 public class LocalPushNotificator
 {

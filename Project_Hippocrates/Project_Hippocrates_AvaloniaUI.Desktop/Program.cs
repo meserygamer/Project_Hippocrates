@@ -1,7 +1,10 @@
 ﻿using Avalonia;
 using System;
 using Microsoft.Extensions.DependencyInjection;
+using Plugin.LocalNotification;
 using Project_Hippocrates_AvaloniaUI.Extensions;
+using Project_Hippocrates_AvaloniaUI.Services;
+using Project_Hippocrates_AvaloniaUI.Services.LocalPushNotificator;
 using Project_Hippocrates.SQLite;
 
 namespace Project_Hippocrates_AvaloniaUI.Desktop
@@ -34,7 +37,8 @@ namespace Project_Hippocrates_AvaloniaUI.Desktop
                                     .AddSingleton<IViewShower, DesktopViewShower>()
                                     .AddSingleton<INativeNotificator, DesktopNotificator>()
                                     .AddSingleton<LocalPushNotificator>()
-                                    .AddTransient<ISqLiteDbConnectionStringProvider, DesktopSqLiteDbConnectionStringProvider>(provider => new DesktopSqLiteDbConnectionStringProvider("appDb.db"));
+                                    .AddTransient<ISqLiteDbConnectionStringProvider, DesktopSqLiteDbConnectionStringProvider>(
+                                        provider => new DesktopSqLiteDbConnectionStringProvider("appDb.db"));
         }
     }
 }

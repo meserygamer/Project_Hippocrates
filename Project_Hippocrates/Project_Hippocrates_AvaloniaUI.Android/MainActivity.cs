@@ -10,6 +10,8 @@ using Project_Hippocrates_AvaloniaUI.Extensions;
 using Project_Hippocrates.SQLite;
 using Plugin.LocalNotification;
 using Plugin.LocalNotification.AndroidOption;
+using Project_Hippocrates_AvaloniaUI.Services;
+using Project_Hippocrates_AvaloniaUI.Services.LocalPushNotificator;
 
 namespace Project_Hippocrates_AvaloniaUI.Android
 {
