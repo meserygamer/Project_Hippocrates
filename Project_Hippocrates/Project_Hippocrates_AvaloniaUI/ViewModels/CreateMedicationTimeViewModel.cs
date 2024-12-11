@@ -78,4 +78,8 @@ public class CreateMedicationTimeViewModel : EditMedicationTimeViewModelBase
     }
 
     #endregion
+
+    private async Task SetPushForMedicationTime(MedicationTimeDTO medicationTimeDto)
+    {
+    }
 }

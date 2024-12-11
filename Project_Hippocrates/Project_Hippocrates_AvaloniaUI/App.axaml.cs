@@ -56,7 +56,9 @@ namespace Project_Hippocrates_AvaloniaUI
             var viewShower = Services.GetService<IViewShower>();
             viewShower?.ShowViewAsync(typeof(UsersMedicationSchedulesListViewModel), new Bundle());
             _ = Services.GetService<LocalPushNotificator>()!
-                .ShowPushNotificationByTimeSpan("description", "title", TimeSpan.FromSeconds(8));
+                .AddPushNotificationInScheduleAsync(
+                    new PushSettings("description", "title", null, TimeSpan.FromSeconds(8))
+                    );
             base.OnFrameworkInitializationCompleted();
         }
     }
