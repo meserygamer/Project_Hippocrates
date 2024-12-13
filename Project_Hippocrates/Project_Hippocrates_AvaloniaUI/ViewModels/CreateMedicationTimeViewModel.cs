@@ -56,9 +56,10 @@ public class CreateMedicationTimeViewModel : EditMedicationTimeViewModelBase
     {
         try
         {
-            if (!await _model.TryCreateMedicationTimeForSchedule(_currentMedicationScheduleId,
+            if (!await _model.TryCreateMedicationTimeForScheduleAsync(_currentMedicationScheduleId,
                     base.DisplayedMedicationTime))
             {
+                await _model.SetPushForMedicationTimeAsync(base.DisplayedMedicationTime);
                 await _nativeNotificator.SendMessageAsync("Время приёма лекарств успешно создано!");
             }
             await _nativeNotificator.SendMessageAsync("Создание не удалось!");

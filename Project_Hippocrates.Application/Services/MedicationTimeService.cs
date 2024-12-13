@@ -35,7 +35,7 @@ public class MedicationTimeService
     }
     public async Task<bool> CreateMedicationTimeAsync(MedicationTime medicationTime)
         => await _medicationTimeRepository.AddAsync(medicationTime);
-    public async Task<bool> ChangeEntityByIdAsync(Guid guid, MedicationTime medicationTime)
+    public async Task<bool> UpdateMedicationTimeAsync(MedicationTime medicationTime)
         => await _medicationTimeRepository.UpdateAsync(medicationTime);
     public async Task<MedicationTime?> FindMedicationTimeByIdAsync(Guid id)
         => await _medicationTimeRepository.GetByIdAsync(id);

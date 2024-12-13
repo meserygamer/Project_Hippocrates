@@ -25,14 +25,14 @@ public class CreateMedicationTimeModel : ModelBase<CreateMedicationTimeViewModel
         _localPushNotificator = localPushNotificator;
     }
 
-    public async Task<bool> TryCreateMedicationTimeForSchedule(Guid scheduleId,
+    public async Task<bool> TryCreateMedicationTimeForScheduleAsync(Guid scheduleId,
         MedicationTimeDTO dto)
     {
         MedicationTime medicationTime = _mapper.Map<MedicationTime>(dto);
         return await _medicationTimeService.CreateMedicationTimeAndJoinToScheduleAsync(scheduleId, medicationTime);
     }
     
-    private async Task SetPushForMedicationTime(MedicationTimeDTO dto)
+    public async Task SetPushForMedicationTimeAsync(MedicationTimeDTO dto)
     {
         int notificationId = await _localPushNotificator.AddPushNotificationInScheduleAsync(
             new PushSettings("Пора пить таблетки!",
@@ -41,6 +41,6 @@ public class CreateMedicationTimeModel : ModelBase<CreateMedicationTimeViewModel
                 null)
         );
         dto.NotificationId = notificationId;
-        await _medicationTimeService.ChangeEntityByIdAsync(dto.Id, _mapper.Map<MedicationTime>(dto));
+        await _medicationTimeService.UpdateMedicationTimeAsync(_mapper.Map<MedicationTime>(dto));
     }
 }
