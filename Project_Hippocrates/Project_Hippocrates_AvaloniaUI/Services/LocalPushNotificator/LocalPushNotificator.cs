@@ -24,7 +24,7 @@ public class LocalPushNotificator
 
     #region Methods
 
-    public async Task<int> AddPushNotificationInScheduleAsync(PushSettings settings)
+    public async ValueTask<int> AddPushNotificationInScheduleAsync(PushSettings settings)
     {
         await UpdateIfNullBusyNotificationIdsAsync();
         NotificationRequest request = settings.ResponseTime is null? 

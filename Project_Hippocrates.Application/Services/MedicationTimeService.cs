@@ -25,7 +25,7 @@ public class MedicationTimeService
                 throw new ApplicationException("MedicationTime creation was failed");
             IEnumerable<MedicationTime> medicationTimes = schedule.MedicationTimes.Union(new []{medicationTime});
             schedule.MedicationTimes = medicationTimes;
-            return await _medicationScheduleRepository.ChangeEntityByIdAsync(scheduleId, schedule);
+            return await _medicationScheduleRepository.UpdateAsync(schedule);
         }
         catch (Exception e)
         {
@@ -36,7 +36,7 @@ public class MedicationTimeService
     public async Task<bool> CreateMedicationTimeAsync(MedicationTime medicationTime)
         => await _medicationTimeRepository.AddAsync(medicationTime);
     public async Task<bool> ChangeEntityByIdAsync(Guid guid, MedicationTime medicationTime)
-        => await _medicationTimeRepository.ChangeEntityByIdAsync(guid, medicationTime);
+        => await _medicationTimeRepository.UpdateAsync(medicationTime);
     public async Task<MedicationTime?> FindMedicationTimeByIdAsync(Guid id)
         => await _medicationTimeRepository.GetByIdAsync(id);
     public async Task<IEnumerable<int>> GetAllBusyNotificationIdAsync()

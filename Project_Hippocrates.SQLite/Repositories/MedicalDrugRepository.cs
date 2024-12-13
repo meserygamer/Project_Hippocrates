@@ -44,13 +44,12 @@ public class MedicalDrugRepository : IDomainEntityRepository<MedicalDrug>
         }
     }
 
-    public bool ChangeEntityById(Guid guid, MedicalDrug newValue)
+    public bool Update(MedicalDrug newValue)
     {
         try
         {
-            MedicalDrugEntity dbEntity = _dbContext.MedicalDrugs.Find(guid) 
-                                        ?? throw new Exception($"MedicalDrug with id:{guid} was not found!");
-            CopyEntityFromCore(dbEntity, newValue);
+            var newDbValue = _mapper.Map<MedicalDrugEntity>(newValue);
+            _dbContext.MedicalDrugs.Update(newDbValue);
             _dbContext.SaveChanges();
             return true;
         }
@@ -86,13 +85,12 @@ public class MedicalDrugRepository : IDomainEntityRepository<MedicalDrug>
         }
     }
 
-    public async Task<bool> ChangeEntityByIdAsync(Guid guid, MedicalDrug newValue)
+    public async Task<bool> UpdateAsync(MedicalDrug newValue)
     {
         try
         {
-            MedicalDrugEntity dbEntity = await _dbContext.MedicalDrugs.FindAsync(guid) 
-                                         ?? throw new Exception($"MedicalDrug with id:{guid} was not found!");
-            CopyEntityFromCore(dbEntity, newValue);
+            var newDbValue = _mapper.Map<MedicalDrugEntity>(newValue);
+            _dbContext.MedicalDrugs.Update(newDbValue);
             await _dbContext.SaveChangesAsync();
             return true;
         }
@@ -101,11 +99,5 @@ public class MedicalDrugRepository : IDomainEntityRepository<MedicalDrug>
             Console.WriteLine(e);
             return false;
         }
-    }
-    
-    private void CopyEntityFromCore(MedicalDrugEntity dest, MedicalDrug source)
-    {
-        dest.Id = source.Id;
-        dest.Name = source.Name;
     }
 }

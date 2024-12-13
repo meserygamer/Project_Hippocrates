@@ -10,7 +10,6 @@ public class MedicationTimeDTO
     public string Label { get; set; } = String.Empty;
     public TimeSpan Time { get; set; } = new TimeSpan(12, 0, 0);
     public ObservableCollection<DrugDosageDTO> MedicationsTaken { get; set; } = [];
-    
     public int NotificationId { get; set; }
 
     public string MedicationTakenList

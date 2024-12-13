@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Project_Hippocrates_AvaloniaUI.Models.DTOs;
 using Project_Hippocrates_AvaloniaUI.Models.EditMedicationTimeModels;
 using Project_Hippocrates_AvaloniaUI.Services;
 using Project_Hippocrates_AvaloniaUI.Services.LocalPushNotificator;
@@ -13,7 +12,6 @@ public class CreateMedicationTimeViewModel : EditMedicationTimeViewModelBase
 
     private readonly CreateMedicationTimeModel _model;
     private readonly INativeNotificator _nativeNotificator;
-    private readonly LocalPushNotificator _localPushNotificator;
 
     private Guid _currentMedicationScheduleId;
 
@@ -23,23 +21,18 @@ public class CreateMedicationTimeViewModel : EditMedicationTimeViewModelBase
 
     public CreateMedicationTimeViewModel(CreateMedicationTimeModel model,
         INativeNotificator nativeNotificator,
-        IViewShower viewShower,
-        LocalPushNotificator localPushNotificator) 
+        IViewShower viewShower) 
         : base(new (), viewShower) 
     {
         _model = model;
         _model.ViewModel = this;
         _nativeNotificator = nativeNotificator;
-        _localPushNotificator = localPushNotificator;
     }
 
     /// <summary>
     /// Only for design mode
     /// </summary>
-    public CreateMedicationTimeViewModel(LocalPushNotificator localPushNotificator) : base(new (), null!)
-    {
-        _localPushNotificator = localPushNotificator;
-    }
+    public CreateMedicationTimeViewModel() : base(new (), null!) { }
 
     #endregion
 
@@ -78,12 +71,4 @@ public class CreateMedicationTimeViewModel : EditMedicationTimeViewModelBase
     }
 
     #endregion
-
-    private async Task SetPushForMedicationTime(MedicationTimeDTO medicationTimeDto)
-        => await _localPushNotificator.AddPushNotificationInScheduleAsync(
-            new PushSettings("Пора пить таблетки!",
-                medicationTimeDto.MedicationTakenList,
-                DateTime.Today + medicationTimeDto.Time,
-                null)
-            );
 }

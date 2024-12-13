@@ -22,14 +22,13 @@ public class MedicationTimeRepository : IDomainEntityRepository<MedicationTime>
             return false;
         }
     }
-    public bool ChangeEntityById(Guid guid, MedicationTime newValue)
+    public bool Update(MedicationTime newValue)
     {
         try
         {
-            MedicationTime? medicationTime = GetById(guid);
+            MedicationTime? medicationTime = GetById(newValue.Id);
             if (medicationTime is null)
                 return false;
-            newValue.Id = guid;
             TestStorage.MedicationTimes.Remove(medicationTime);
             TestStorage.MedicationTimes.Add(newValue);
             return true;
@@ -47,6 +46,6 @@ public class MedicationTimeRepository : IDomainEntityRepository<MedicationTime>
         => await Task.Run(() => GetById(id));
     public async Task<bool> AddAsync(MedicationTime entity)
         => await Task.Run(() => Add(entity));
-    public async Task<bool> ChangeEntityByIdAsync(Guid guid, MedicationTime newValue)
-        => await Task.Run(() => ChangeEntityById(guid, newValue));
+    public async Task<bool> UpdateAsync(MedicationTime newValue)
+        => await Task.Run(() => Update(newValue));
 }

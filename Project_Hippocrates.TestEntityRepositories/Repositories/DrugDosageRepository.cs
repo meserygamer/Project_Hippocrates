@@ -22,14 +22,13 @@ public class DrugDosageRepository : IDomainEntityRepository<DrugDosage>
             return false;
         }
     }
-    public bool ChangeEntityById(Guid guid, DrugDosage newValue)
+    public bool Update(DrugDosage newValue)
     {
         try
         {
-            DrugDosage? drugDosage = GetById(guid);
+            DrugDosage? drugDosage = GetById(newValue.Id);
             if (drugDosage is null)
                 return false;
-            newValue.Id = guid;
             TestStorage.DrugDosages.Remove(drugDosage);
             TestStorage.DrugDosages.Add(newValue);
             return true;
@@ -47,6 +46,6 @@ public class DrugDosageRepository : IDomainEntityRepository<DrugDosage>
         => await Task.Run(() => GetById(id));
     public async Task<bool> AddAsync(DrugDosage entity)
         => await Task.Run(() => Add(entity));
-    public async Task<bool> ChangeEntityByIdAsync(Guid guid, DrugDosage newValue)
-        => await Task.Run(() => ChangeEntityById(guid, newValue));
+    public async Task<bool> UpdateAsync(DrugDosage newValue)
+        => await Task.Run(() => Update(newValue));
 }

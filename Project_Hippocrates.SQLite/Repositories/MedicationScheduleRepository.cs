@@ -42,13 +42,12 @@ public class MedicationScheduleRepository : IDomainEntityRepository<MedicationSc
         }
     }
 
-    public bool ChangeEntityById(Guid guid, MedicationSchedule newValue)
+    public bool Update(MedicationSchedule newValue)
     {
         try
         {
-            MedicationScheduleEntity dbEntity = _dbContext.MedicationSchedules.Find(guid) 
-                                                ?? throw new Exception($"MedicationSchedule with id:{guid} was not found!");
-            CopyEntityFromCore(dbEntity, newValue);
+            var newDbValue = _mapper.Map<MedicationScheduleEntity>(newValue);
+            _dbContext.MedicationSchedules.Update(newDbValue);
             _dbContext.SaveChanges();
             return true;
         }
@@ -84,13 +83,12 @@ public class MedicationScheduleRepository : IDomainEntityRepository<MedicationSc
         }
     }
 
-    public async Task<bool> ChangeEntityByIdAsync(Guid guid, MedicationSchedule newValue)
+    public async Task<bool> UpdateAsync(MedicationSchedule newValue)
     {
         try
         {
-            MedicationScheduleEntity dbEntity = await _dbContext.MedicationSchedules.FindAsync(guid) 
-                                                ?? throw new Exception($"MedicationSchedule with id:{guid} was not found!");
-            CopyEntityFromCore(dbEntity, newValue);
+            var newDbValue = _mapper.Map<MedicationScheduleEntity>(newValue);
+            _dbContext.MedicationSchedules.Update(newDbValue);
             await _dbContext.SaveChangesAsync();
             return true;
         }

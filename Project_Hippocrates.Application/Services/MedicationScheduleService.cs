@@ -24,7 +24,7 @@ public class MedicationScheduleService
             return false;
         IEnumerable<MedicationTime> newMedicationTimes = medicationSchedule.MedicationTimes.Where(mt => mt.Id != removingMedicationTimeId);
         medicationSchedule.MedicationTimes = newMedicationTimes;
-        return await _medicationScheduleRepository.ChangeEntityByIdAsync(medicationScheduleId, medicationSchedule);
+        return await _medicationScheduleRepository.UpdateAsync(medicationSchedule);
     }
 
     public async Task<IEnumerable<MedicationTime>> GetMedicationTimesByScheduleAsync(Guid medicationScheduleId)

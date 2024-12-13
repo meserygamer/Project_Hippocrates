@@ -43,13 +43,12 @@ public class MedicationTimeRepository : IDomainEntityRepository<MedicationTime>
         }
     }
 
-    public bool ChangeEntityById(Guid guid, MedicationTime newValue)
+    public bool Update(MedicationTime newValue)
     {
         try
         {
-            MedicationTimeEntity dbEntity = _dbContext.MedicationTimes.Find(guid) 
-                                                ?? throw new Exception($"MedicationTime with id:{guid} was not found!");
-            CopyEntityFromCore(dbEntity, newValue);
+            var newDbValue = _mapper.Map<MedicationTimeEntity>(newValue);
+            _dbContext.MedicationTimes.Update(newDbValue);
             _dbContext.SaveChanges();
             return true;
         }
@@ -85,13 +84,12 @@ public class MedicationTimeRepository : IDomainEntityRepository<MedicationTime>
         }
     }
 
-    public async Task<bool> ChangeEntityByIdAsync(Guid guid, MedicationTime newValue)
+    public async Task<bool> UpdateAsync(MedicationTime newValue)
     {
         try
         {
-            MedicationTimeEntity dbEntity = await _dbContext.MedicationTimes.FindAsync(guid) 
-                                            ?? throw new Exception($"MedicationTime with id:{guid} was not found!");
-            CopyEntityFromCore(dbEntity, newValue);
+            var newDbValue = _mapper.Map<MedicationTimeEntity>(newValue);
+            _dbContext.MedicationTimes.Update(newDbValue);
             await _dbContext.SaveChangesAsync();
             return true;
         }
@@ -100,17 +98,5 @@ public class MedicationTimeRepository : IDomainEntityRepository<MedicationTime>
             Console.WriteLine(e);
             return false;
         }
-    }
-    
-    private void CopyEntityFromCore(MedicationTimeEntity dest, MedicationTime source)
-    {
-        dest.Id = source.Id;
-        dest.Label = source.Label;
-        dest.Time = source.Time;
-        dest.PushNotificationId = source.NotificationId;
-        dest.MedicationsTaken = source.MedicationsTaken
-            .AsQueryable()
-            .ProjectToType<DrugDosageEntity>(_mapper.Config)
-            .ToList();
     }
 }
