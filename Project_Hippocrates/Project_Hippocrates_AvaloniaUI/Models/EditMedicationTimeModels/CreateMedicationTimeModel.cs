@@ -29,10 +29,18 @@ public class CreateMedicationTimeModel : ModelBase<CreateMedicationTimeViewModel
         MedicationTimeDTO dto)
     {
         MedicationTime medicationTime = _mapper.Map<MedicationTime>(dto);
-        return await _medicationTimeService.CreateMedicationTimeAndJoinToScheduleAsync(scheduleId, medicationTime);
+#if ANDROID || IOS
+        medicationTime.NotificationId = await SetSchedulePushAsync(dto);
+#else
+        
+#endif
+        bool isSuccessOperation = await _medicationTimeService.CreateAndJoinToScheduleAsync(scheduleId, medicationTime);
+        if (!isSuccessOperation)
+            CancelSchedulePush(medicationTime.NotificationId);
+        return isSuccessOperation;
     }
     
-    public async Task SetPushForMedicationTimeAsync(MedicationTimeDTO dto)
+    private async Task<int> SetSchedulePushAsync(MedicationTimeDTO dto)
     {
         int notificationId = await _localPushNotificator.AddPushNotificationInScheduleAsync(
             new PushSettings("Пора пить таблетки!",
@@ -40,7 +48,9 @@ public class CreateMedicationTimeModel : ModelBase<CreateMedicationTimeViewModel
                 DateTime.Today + dto.Time,
                 null)
         );
-        dto.NotificationId = notificationId;
-        await _medicationTimeService.UpdateMedicationTimeAsync(_mapper.Map<MedicationTime>(dto));
+        return notificationId;
     }
+
+    public bool CancelSchedulePush(int notificationId)
+        => _localPushNotificator.CancelNotificationById(notificationId);
 }

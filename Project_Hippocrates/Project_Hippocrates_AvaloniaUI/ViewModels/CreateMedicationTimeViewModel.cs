@@ -54,21 +54,13 @@ public class CreateMedicationTimeViewModel : EditMedicationTimeViewModelBase
 
     public override async Task OnSubmitAsync()
     {
-        try
+        if (await _model.TryCreateMedicationTimeForScheduleAsync(_currentMedicationScheduleId,
+                base.DisplayedMedicationTime))
         {
-            if (!await _model.TryCreateMedicationTimeForScheduleAsync(_currentMedicationScheduleId,
-                    base.DisplayedMedicationTime))
-            {
-                await _model.SetPushForMedicationTimeAsync(base.DisplayedMedicationTime);
-                await _nativeNotificator.SendMessageAsync("Время приёма лекарств успешно создано!");
-            }
-            await _nativeNotificator.SendMessageAsync("Создание не удалось!");
+            await _nativeNotificator.SendMessageAsync("Время приёма лекарств успешно создано!");
+            return;
         }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            await _nativeNotificator.SendMessageAsync("Что-то пошло не так!");
-        }
+        await _nativeNotificator.SendMessageAsync("Что-то пошло не так!");
     }
 
     #endregion
