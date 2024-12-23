@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Plugin.LocalNotification;
 using Project_Hippocrates.Application.Services;
@@ -80,7 +79,7 @@ public class LocalPushNotificator
         if (_busyNotificationIds is null)
             throw new NullReferenceException($"{nameof(_busyNotificationIds)} is null");
         
-        for (int i = 0; i < int.MaxValue; i++)
+        for (int i = 1; i < int.MaxValue; i++)
         {
             if(_busyNotificationIds.Contains(i))
                 continue;
