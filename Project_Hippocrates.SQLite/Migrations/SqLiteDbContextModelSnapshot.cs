@@ -117,9 +117,7 @@ namespace Project_Hippocrates.SQLite.Migrations
                 {
                     b.HasOne("Project_Hippocrates.SQLite.SqlEntities.MedicalDrugEntity", "Drug")
                         .WithOne("DrugDosage")
-                        .HasForeignKey("Project_Hippocrates.SQLite.SqlEntities.DrugDosageEntity", "DrugId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Project_Hippocrates.SQLite.SqlEntities.DrugDosageEntity", "DrugId");
 
                     b.HasOne("Project_Hippocrates.SQLite.SqlEntities.MedicationTimeEntity", "MedicationTime")
                         .WithMany("MedicationsTaken")

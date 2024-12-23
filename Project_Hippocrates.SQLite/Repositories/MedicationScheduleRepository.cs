@@ -58,12 +58,17 @@ public class MedicationScheduleRepository : IDomainEntityRepository<MedicationSc
         }
     }
 
-    public async Task<IEnumerable<MedicationSchedule>> GetAllAsync() => 
-        await Task.Run(() => _dbContext.MedicationSchedules
-            .ProjectToType<MedicationSchedule>(_mapper.Config));
+    public async Task<IEnumerable<MedicationSchedule>> GetAllAsync()
+        => (await _dbContext.MedicationSchedules.Include(ms => ms.MedicationTimes)
+                .ThenInclude(mt => mt.MedicationsTaken)
+                .ThenInclude(d => d.Drug)
+                .ToListAsync())
+            .AsQueryable()
+            .ProjectToType<MedicationSchedule>(_mapper.Config);
     
     public async Task<MedicationSchedule?> GetByIdAsync(Guid id) => 
-        await _dbContext.MedicationSchedules
+        await _dbContext.MedicationSchedules.Include(ms => ms.MedicationTimes)
+            .ThenInclude(mt => mt.MedicationsTaken)
             .ProjectToType<MedicationSchedule>(_mapper.Config)
             .FirstOrDefaultAsync(ms => ms.Id == id);
 

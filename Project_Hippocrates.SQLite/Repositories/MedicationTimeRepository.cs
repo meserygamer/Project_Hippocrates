@@ -65,6 +65,8 @@ public class MedicationTimeRepository : IDomainEntityRepository<MedicationTime>
 
     public async Task<MedicationTime?> GetByIdAsync(Guid id) => 
         await _dbContext.MedicationTimes
+            .Include(mt => mt.MedicationsTaken)
+            .ThenInclude(d => d.Drug)
             .ProjectToType<MedicationTime>(_mapper.Config)
             .FirstOrDefaultAsync(ms => ms.Id == id);
 
