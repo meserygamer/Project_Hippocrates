@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Project_Hippocrates_AvaloniaUI.Models.EditMedicationTimeModels;
+using Project_Hippocrates_AvaloniaUI.Services;
+using Project_Hippocrates_AvaloniaUI.Services.LocalPushNotificator;
 
 namespace Project_Hippocrates_AvaloniaUI.ViewModels;
 
@@ -52,20 +54,13 @@ public class CreateMedicationTimeViewModel : EditMedicationTimeViewModelBase
 
     public override async Task OnSubmitAsync()
     {
-        try
+        if (await _model.TryCreateMedicationTimeForScheduleAsync(_currentMedicationScheduleId,
+                base.DisplayedMedicationTime))
         {
-            if (!await _model.TryCreateMedicationTimeForSchedule(_currentMedicationScheduleId,
-                    base.DisplayedMedicationTime))
-            {
-                await _nativeNotificator.SendMessageAsync("Время приёма лекарств успешно создано!");
-            }
-            await _nativeNotificator.SendMessageAsync("Создание не удалось!");
+            await _nativeNotificator.SendMessageAsync("Время приёма лекарств успешно создано!");
+            return;
         }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-            await _nativeNotificator.SendMessageAsync("Что-то пошло не так!");
-        }
+        await _nativeNotificator.SendMessageAsync("Что-то пошло не так!");
     }
 
     #endregion

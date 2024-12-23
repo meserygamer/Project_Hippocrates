@@ -10,7 +10,11 @@ using Project_Hippocrates_AvaloniaUI.Views;
 using Project_Hippocrates.Application.Services;
 using Project_Hippocrates.Core;
 using Project_Hippocrates.Core.Entities;
+using Project_Hippocrates.Core.Interfaces.Storage;
 using Project_Hippocrates.SQLite;
+using Project_Hippocrates.SQLite.StorageServices;
+using System;
+using Project_Hippocrates.SQLite.Mapping;
 
 namespace Project_Hippocrates_AvaloniaUI.Extensions;
 
@@ -51,8 +55,9 @@ public static class ServiceCollectionExtensions
 
     public static IServiceCollection AddMapper(this IServiceCollection serviceCollection)
     {
+        var exe = Assembly.GetExecutingAssembly();
         var config = TypeAdapterConfig.GlobalSettings;
-        config.Scan(Assembly.GetExecutingAssembly());
+        config.Scan(Assembly.GetExecutingAssembly(), Assembly.Load("Project_Hippocrates.SQLite"));
         serviceCollection.AddSingleton<TypeAdapterConfig>(config);
         serviceCollection.AddSingleton<IMapper, ServiceMapper>();
         return serviceCollection;
@@ -80,6 +85,7 @@ public static class ServiceCollectionExtensions
                 Project_Hippocrates.SQLite.Repositories.MedicationScheduleRepository>()
             .AddTransient<IDomainEntityRepository<MedicationTime>, 
                 Project_Hippocrates.SQLite.Repositories.MedicationTimeRepository>()
+            .AddTransient<IMedicationTimeStorageService, SqLiteMedicationTimeStorageService>()
             .AddTransient<SqLiteDbContext, SqLiteDbContext>();
     }
 }

@@ -11,11 +11,16 @@ public class MedicationScheduleEntityMappingConfig : IRegister
         config.NewConfig<MedicationScheduleEntity, MedicationSchedule>()
             .Map(dest => dest.Id, source => source.Id)
             .Map(dest => dest.Name, source => source.Name)
-            .Map(dest => dest.MedicationTimes, source => source.MedicationTimes.AsQueryable().ProjectToType<MedicationTime>(config));
+            .Map(dest => dest.MedicationTimes, source => 
+                (source.MedicationTimes ?? new HashSet<MedicationTimeEntity>())
+                .Select(entity => entity.Adapt<MedicationTime>(config)));
         
         config.NewConfig<MedicationSchedule, MedicationScheduleEntity>()
             .Map(dest => dest.Id, source => source.Id)
             .Map(dest => dest.Name, source => source.Name)
-            .Map(dest => dest.MedicationTimes, source => source.MedicationTimes.AsQueryable().ProjectToType<MedicationTimeEntity>(config).ToList());
+            .Map(dest => dest.MedicationTimes, source => 
+                (source.MedicationTimes ?? new HashSet<MedicationTime>())
+                .Select(entity => entity.Adapt<MedicationTimeEntity>(config))
+                .ToList());
     }
 }

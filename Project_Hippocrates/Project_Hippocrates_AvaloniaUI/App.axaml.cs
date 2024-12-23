@@ -1,9 +1,13 @@
+using System;
 using System.Collections.Generic;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
+using Plugin.LocalNotification;
+using Project_Hippocrates_AvaloniaUI.Services;
+using Project_Hippocrates_AvaloniaUI.Services.LocalPushNotificator;
 using Project_Hippocrates_AvaloniaUI.ViewModels;
 using Project_Hippocrates_AvaloniaUI.Views;
 using Project_Hippocrates.SQLite;
@@ -51,6 +55,10 @@ namespace Project_Hippocrates_AvaloniaUI
             }
             var viewShower = Services.GetService<IViewShower>();
             viewShower?.ShowViewAsync(typeof(UsersMedicationSchedulesListViewModel), new Bundle());
+            _ = Services.GetService<LocalPushNotificator>()!
+                .AddPushNotificationInScheduleAsync(
+                    new PushSettings("description", "title", null, TimeSpan.FromSeconds(8))
+                    );
             base.OnFrameworkInitializationCompleted();
         }
     }

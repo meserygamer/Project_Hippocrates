@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Project_Hippocrates_AvaloniaUI.Models.DTOs;
+using Project_Hippocrates_AvaloniaUI.Services;
 
 namespace Project_Hippocrates_AvaloniaUI.ViewModels;
 

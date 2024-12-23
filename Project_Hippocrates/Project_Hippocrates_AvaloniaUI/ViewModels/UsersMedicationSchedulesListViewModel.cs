@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Project_Hippocrates_AvaloniaUI.Models;
 using Project_Hippocrates_AvaloniaUI.Models.DTOs;
+using Project_Hippocrates_AvaloniaUI.Services;
 
 namespace Project_Hippocrates_AvaloniaUI.ViewModels
 {
@@ -86,10 +87,10 @@ namespace Project_Hippocrates_AvaloniaUI.ViewModels
         /// Method-handler of click on AddMedicationTime button
         /// </summary>
         public async Task OnAddMedicationTimeButtonClickAsync()
-            => await _viewShower.ShowViewAsync(typeof(CreateMedicationTimeViewModel),
-                new Bundle(
-                    new Dictionary<string, object?>{{"CurrentMedicationSchedule", _selectedMedicationSchedule!.Id}}
-                    ));
+        {
+            await _viewShower.ShowViewAsync(typeof(CreateMedicationTimeViewModel),
+                new Bundle(new Dictionary<string, object?> { { "CurrentMedicationSchedule", _selectedMedicationSchedule!.Id } }));
+        }
         
         /// <summary>
         /// Method-handler of click on RemoveMedicationTime button

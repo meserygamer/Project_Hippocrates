@@ -21,6 +21,6 @@ public class MedicalDrugConfiguration : IEntityTypeConfiguration<MedicalDrugEnti
         builder.HasOne(md => md.DrugDosage)
             .WithOne(d => d.Drug)
             .HasForeignKey<DrugDosageEntity>(d => d.DrugId)
-            .IsRequired();
+            .IsRequired(false); 
     }
 }

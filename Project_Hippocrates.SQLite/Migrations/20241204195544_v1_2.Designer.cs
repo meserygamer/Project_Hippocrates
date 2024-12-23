@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Project_Hippocrates.SQLite;
 
@@ -10,9 +11,11 @@ using Project_Hippocrates.SQLite;
 namespace Project_Hippocrates.SQLite.Migrations
 {
     [DbContext(typeof(SqLiteDbContext))]
-    partial class SqLiteDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241204195544_v1_2")]
+    partial class v1_2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
@@ -117,7 +120,9 @@ namespace Project_Hippocrates.SQLite.Migrations
                 {
                     b.HasOne("Project_Hippocrates.SQLite.SqlEntities.MedicalDrugEntity", "Drug")
                         .WithOne("DrugDosage")
-                        .HasForeignKey("Project_Hippocrates.SQLite.SqlEntities.DrugDosageEntity", "DrugId");
+                        .HasForeignKey("Project_Hippocrates.SQLite.SqlEntities.DrugDosageEntity", "DrugId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Project_Hippocrates.SQLite.SqlEntities.MedicationTimeEntity", "MedicationTime")
                         .WithMany("MedicationsTaken")

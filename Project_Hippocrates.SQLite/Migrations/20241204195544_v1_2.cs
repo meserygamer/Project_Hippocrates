@@ -11,6 +11,13 @@ namespace Project_Hippocrates.SQLite.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AddColumn<int>(
+                name: "PushNotificationId",
+                table: "MedicationTimes",
+                type: "INTEGER",
+                nullable: false,
+                defaultValue: 0);
+
             migrationBuilder.InsertData(
                 table: "MedicationSchedules",
                 columns: new[] { "Id", "Name" },
@@ -24,6 +31,10 @@ namespace Project_Hippocrates.SQLite.Migrations
                 table: "MedicationSchedules",
                 keyColumn: "Id",
                 keyValue: new Guid("f5fd4ea2-9bd4-456f-b704-af8f4c9b82e6"));
+
+            migrationBuilder.DropColumn(
+                name: "PushNotificationId",
+                table: "MedicationTimes");
         }
     }
 }

@@ -12,7 +12,8 @@ public class DrugDosageRepository : IDomainEntityRepository<DrugDosage>
     private readonly SqLiteDbContext _dbContext;
     private readonly IMapper _mapper;
     
-    public DrugDosageRepository(SqLiteDbContext dbContext, IMapper mapper)
+    public DrugDosageRepository(SqLiteDbContext dbContext,
+        IMapper mapper)
     {
         _dbContext = dbContext;
         _mapper = mapper;
@@ -43,13 +44,12 @@ public class DrugDosageRepository : IDomainEntityRepository<DrugDosage>
         }
     }
 
-    public bool ChangeEntityById(Guid guid, DrugDosage newValue)
+    public bool Update(DrugDosage newValue)
     {
         try
         {
-            DrugDosageEntity dbEntity = _dbContext.DrugDosages.Find(guid) 
-                                        ?? throw new Exception($"DrugDosage with id:{guid} was not found!");
-            CopyEntityFromCore(dbEntity, newValue);
+            var newDbValue = _mapper.Map<DrugDosageEntity>(newValue);
+            _dbContext.DrugDosages.Update(newDbValue);
             _dbContext.SaveChanges();
             return true;
         }
@@ -85,13 +85,12 @@ public class DrugDosageRepository : IDomainEntityRepository<DrugDosage>
         }
     }
 
-    public async Task<bool> ChangeEntityByIdAsync(Guid guid, DrugDosage newValue)
+    public async Task<bool> UpdateAsync(DrugDosage newValue)
     {
         try
         {
-            DrugDosageEntity dbEntity = await _dbContext.DrugDosages.FindAsync(guid) 
-                                        ?? throw new Exception($"DrugDosage with id:{guid} was not found!");
-            CopyEntityFromCore(dbEntity, newValue);
+            var newDbValue = _mapper.Map<DrugDosageEntity>(newValue);
+            _dbContext.DrugDosages.Update(newDbValue);
             await _dbContext.SaveChangesAsync();
             return true;
         }
@@ -100,13 +99,5 @@ public class DrugDosageRepository : IDomainEntityRepository<DrugDosage>
             Console.WriteLine(e);
             return false;
         }
-    }
-
-    private void CopyEntityFromCore(DrugDosageEntity dest, DrugDosage source)
-    {
-        dest.Id = source.Id;
-        dest.Value = source.DrugDoseValue;
-        dest.DrugId = source.Drug.Id;
-        dest.Unit = source.DoseUnit;
     }
 }

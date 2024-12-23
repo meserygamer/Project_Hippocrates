@@ -15,13 +15,15 @@ public class MedicationTimeMappingConfig : IRegister
             .Map(dest => dest.Id, src => src.Id)
             .Map(dest => dest.Label, src => src.Label)
             .Map(dest => dest.Time, src => src.Time)
-            .Map(dest => dest.MedicationsTaken, src => src.MedicationsTaken);
+            .Map(dest => dest.MedicationsTaken, src => src.MedicationsTaken)
+            .Map(dest => dest.NotificationId, src => src.NotificationId);
         
         config.NewConfig<MedicationTime, MedicationTimeDTO>()
             .Map(dest => dest.Id, src => src.Id)
             .Map(dest => dest.Label, src => src.Label)
             .Map(dest => dest.Time, src => src.Time)
-            .Map(dest => dest.MedicationsTaken, src => ConvertMedicationTaken(src.MedicationsTaken, config));
+            .Map(dest => dest.MedicationsTaken, src => ConvertMedicationTaken(src.MedicationsTaken, config))
+            .Map(dest => dest.NotificationId, src => src.NotificationId);;
     }
 
     private static ObservableCollection<DrugDosageDTO> ConvertMedicationTaken(IEnumerable<DrugDosage> drugDosages, TypeAdapterConfig config)

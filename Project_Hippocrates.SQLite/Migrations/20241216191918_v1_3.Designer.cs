@@ -11,8 +11,8 @@ using Project_Hippocrates.SQLite;
 namespace Project_Hippocrates.SQLite.Migrations
 {
     [DbContext(typeof(SqLiteDbContext))]
-    [Migration("20241202205756_v1_2")]
-    partial class v1_2
+    [Migration("20241216191918_v1_3")]
+    partial class v1_3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -103,6 +103,9 @@ namespace Project_Hippocrates.SQLite.Migrations
                     b.Property<Guid?>("MedicationScheduleId")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("PushNotificationId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<TimeSpan>("Time")
                         .HasColumnType("TEXT");
 
@@ -117,9 +120,7 @@ namespace Project_Hippocrates.SQLite.Migrations
                 {
                     b.HasOne("Project_Hippocrates.SQLite.SqlEntities.MedicalDrugEntity", "Drug")
                         .WithOne("DrugDosage")
-                        .HasForeignKey("Project_Hippocrates.SQLite.SqlEntities.DrugDosageEntity", "DrugId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("Project_Hippocrates.SQLite.SqlEntities.DrugDosageEntity", "DrugId");
 
                     b.HasOne("Project_Hippocrates.SQLite.SqlEntities.MedicationTimeEntity", "MedicationTime")
                         .WithMany("MedicationsTaken")

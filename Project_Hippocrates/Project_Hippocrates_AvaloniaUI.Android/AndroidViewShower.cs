@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Project_Hippocrates_AvaloniaUI.Services;
 using Project_Hippocrates_AvaloniaUI.ViewModels;
 
 namespace Project_Hippocrates_AvaloniaUI.Android;

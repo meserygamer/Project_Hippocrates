@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Mapster;
 using MapsterMapper;
 using Project_Hippocrates_AvaloniaUI.Models.DTOs;
 using Project_Hippocrates_AvaloniaUI.ViewModels;
@@ -25,9 +26,10 @@ public class UsersMedicationSchedulesListModel : ModelBase<UsersMedicationSchedu
 
     public async Task<ObservableCollection<MedicationScheduleDTO>> GetAllMedicationScheduleAsync()
     {
-        IEnumerable<MedicationSchedule> medicationSchedules = await _medicationScheduleService.GetAllMedicationSchedules();
-        IEnumerable<MedicationScheduleDTO> medicationSchedulesDtos =
-            _mapper.Map<IEnumerable<MedicationScheduleDTO>>(medicationSchedules);
+        List<MedicationSchedule> medicationSchedules = (await _medicationScheduleService.GetAllMedicationSchedules())
+            .ToList();
+        List<MedicationScheduleDTO> medicationSchedulesDtos =
+            medicationSchedules.Select(entity => _mapper.Map<MedicationScheduleDTO>(entity)).ToList();
         return new ObservableCollection<MedicationScheduleDTO>(medicationSchedulesDtos);
     }
 
